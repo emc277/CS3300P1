@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+	<title>HW3</title>
+	<link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="http://d3js.org/topojson.v2.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+	<body>
+		<p> This is me just playing around with stuff<br>
+			<svg id = "chart" width = "1000" height = "700">
+			<script>
+				var svg = d3.select("#chart");
+				var usableData = [];
+				var parseLine = function(line){
+					line.Negative = +line.Negative;
+					line.Neutral = +line.Neutral;
+					line.Occurrences = +line.Occurrences;
+					line.Position = +line.Position;
+					line.Positive = +line.Positive;
+					line.Score = (line.Positive - line.Negative)/10000;
+					return line;
+				}
+				var raw_data = d3.csv("Emoji_Sentiment_Data.csv", parseLine, function(error, data){
+					console.log('here');
+					console.log(data);
+					showData(data);
+				});
+				console.log(raw_data);
+				function getTop(data, n){
+					data.sort(function(a,b){return b.Occurrences - a.Occurrences;});
+					return data.slice(0,n);
+				}
+
+				function showData(data){
+					//top 50 displayed
+					/*var top_50 = getTop(data, 50);
+					var neutralExtent = d3.extent(top_50, function(d){return d.Neutral;});
+					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
+					var scoreExtent = d3.extent(top_50, function(d){return d.Score;});
+					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
+					var occurExtent = d3.extent(top_50, function(d){return d.Occurrences;});
+					console.log(occurExtent);
+					var occurScale = d3.scaleLinear().domain(occurExtent).range([10,50]);
+					top_50.forEach(function(d){
+						/*var xPos = scoreScale(d.Score);
+						var yPos = neutralScale(d.Neutral);
+						d['x'] = xPos;
+						d['y'] = ypos;
+						svg.append('text')
+							.text(d.Emoji)
+							.attr("height", occurScale(d.Occurrences))
+							.attr("width", occurScale(d.Occurrences))
+							.style("font-size", occurScale(d.Occurrences))
+							.attr("x", scoreScale(d.Score))
+							.attr("y", neutralScale(d.Neutral));
+					});
+					var xAxis = d3.axisBottom(scoreScale);
+					svg.append('g')
+						.call(xAxis)
+						.attr('transform', 'translate(0,680)');
+					var yAxis = d3.axisLeft(neutralScale);
+					svg.append('g')
+						.call(yAxis)
+						.attr('transform', 'translate(20,0)');
+				}*/
+
+					var neutralExtent = d3.extent(data, function(d){return d.Neutral;});
+					var neutralScale = d3.scaleLog().domain(neutralExtent).range([50,650]);
+					var scoreExtent = d3.extent(data, function(d){return d.Score;});
+					var scoreScale = d3.scaleLog().domain(scoreExtent).range([40,960]);
+					var occurExtent = d3.extent(data, function(d){return d.Occurrences;});
+					console.log(occurExtent);
+					var occurScale = d3.scaleLinear().domain(occurExtent).range([10,50]);
+					data.forEach(function(d){
+						/*var xPos = scoreScale(d.Score);
+						var yPos = neutralScale(d.Neutral);
+						d['x'] = xPos;
+						d['y'] = ypos;*/
+						svg.append('text')
+							.text(d.Emoji)
+							.attr("height", occurScale(d.Occurrences))
+							.attr("width", occurScale(d.Occurrences))
+							.style("font-size", occurScale(d.Occurrences))
+							.attr("x", scoreScale(d.Score))
+							.attr("y", neutralScale(d.Neutral));
+					});
+					var xAxis = d3.axisBottom(scoreScale);
+					svg.append('g')
+						.call(xAxis)
+						.attr('transform', 'translate(0,680)');
+					var yAxis = d3.axisLeft(neutralScale);
+					svg.append('g')
+						.call(yAxis)
+						.attr('transform', 'translate(20,0)');
+				}
+
+				/*function drawEllipse(category,color){
+					var x_coords = category.map(function(d){return d.x;});
+					var y_coords = category.map(function(d){return d.y;});
+					var x_max = Math.max.apply(null,x_coords);
+					var x_min = Math.min.apply(null,x_coords);
+					var y_max = Math.max.apply(null,y_coords);
+					var y_min = Math.min.apply(null,y_coords);
+					// var x_radius = Math.max.apply(null,x_coords) - Math.min.apply(null,x_coords);
+					// var y_radius = Math.max.apply(null,y_coords) - Math.min.apply(null,y_coords);
+					//var x_center = 
+
+					svg.append('ellipse')
+						.attr('cx', (x_min + (x_max - x_min)/2))
+						.attr('cy', (y_min + (y_max - y_min)/2))
+						.attr('rx', (x_max - x_min)/2)
+						.attr('ry', (y_max - y_min)/2)
+						.attr('transform', 'rotate()')
+				}*/
+
+				/*function createPaths(category, color){
+					var points = pathData(category);
+					var lineGenerator = d3.svg.line()
+												.x(function(d){return d.x;})
+												.y(function(d){return d.y;});
+
+				}
+
+				//might be redundant
+				function pathData(category){
+					var toReturn = [];
+					category.forEach(function(d){
+						var coords = {'x': d.x, 'y': d.y};
+						toReturn.push(coords);});
+					return toReturn;
+				}*/
+				console.log('terminated');
+
+			</script>
+		</p>	
+	</body>
+</head>
+</html>
