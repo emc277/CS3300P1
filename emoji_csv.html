@@ -67,9 +67,10 @@
 				}*/
 
 					var neutralExtent = d3.extent(data, function(d){return d.Neutral;});
-					var neutralScale = d3.scaleLog().domain(neutralExtent).range([50,650]);
+					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
 					var scoreExtent = d3.extent(data, function(d){return d.Score;});
-					var scoreScale = d3.scaleLog().domain(scoreExtent).range([40,960]);
+					console.log(scoreExtent);
+					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
 					var occurExtent = d3.extent(data, function(d){return d.Occurrences;});
 					console.log(occurExtent);
 					var occurScale = d3.scaleLinear().domain(occurExtent).range([10,50]);
@@ -78,6 +79,7 @@
 						var yPos = neutralScale(d.Neutral);
 						d['x'] = xPos;
 						d['y'] = ypos;*/
+						//console.log(scoreScale(d.Score));
 						svg.append('text')
 							.text(d.Emoji)
 							.attr("height", occurScale(d.Occurrences))
@@ -133,6 +135,49 @@
 				}*/
 				console.log('terminated');
 
+			</script>
+		</p>
+		<p>
+			Look we have a circle!<br>
+			<svg id = "piethingy" width = "1000" height = "700">
+			<script>
+				var backdrop = d3.select('#piethingy');
+				var circleCenter = [500, 350];
+				var circleRadius = 200;
+
+				var raw_data_2 = d3.csv("Emoji_Sentiment_Data.csv", function(error, data){
+					console.log('here');
+					console.log(data);
+					circleData(data);
+				});
+
+				function circleData(data){
+					var top30 = getTop(data, 30);
+					var emojis = top30.map(function(d){return d.Emoji;}).join(' ');
+
+					//create circular path
+					backdrop.append('path')
+						.attr('id', 'curve')
+						.attr('fill', 'none')
+						.attr('d', "M" + circleCenter[0] + "," + circleCenter[1] + " " +
+						           "m" + -circleRadius + ", 0 " +
+						           "a" + circleRadius + "," + circleRadius + " 0 1,0 " + 
+						           			circleRadius*2  + ",0 " +
+						           "a" + circleRadius + "," + circleRadius + " 0 1,0 " + 
+						           			-circleRadius*2 + ",0Z");
+					//add the text around the circle
+					backdrop.append("text")
+					    .attr("id", "curve-text")
+					  	.append("textPath")
+					    .attr("xlink:href", "#curve")
+					    .style('font-size', 36)
+					    .text(emojis);
+					
+					backdrop.append("use")
+					    .attr("id", "curve-line")
+					    .attr("xlink:href", "#curve");
+
+				}
 			</script>
 		</p>	
 	</body>
