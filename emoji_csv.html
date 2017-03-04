@@ -67,7 +67,7 @@
 				}*/
 
 					var neutralExtent = d3.extent(data, function(d){return d.Neutral;});
-					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
+					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([650,50]);
 					var scoreExtent = d3.extent(data, function(d){return d.Score;});
 					console.log(scoreExtent);
 					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
