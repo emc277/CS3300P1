@@ -145,15 +145,25 @@
 				var circleCenter = [500, 350];
 				var circleRadius = 200;
 
-				var raw_data_2 = d3.csv("Emoji_Sentiment_Data.csv", function(error, data){
+				var raw_data_2 = d3.csv("Emoji_Sentiment_Data.csv", parseLine, function(error, data){
 					console.log('here');
 					console.log(data);
 					circleData(data);
 				});
 
 				function circleData(data){
-					var top30 = getTop(data, 30);
-					var emojis = top30.map(function(d){return d.Emoji;}).join(' ');
+					//var top30 = getTop(data, 30);
+					//var emojis = top30.map(function(d){return d.Emoji;}).join(' ');
+					//console.log(data);
+					var filtered = data.filter(function(d){
+						return d.Language != undefined;
+					});
+
+					console.log('filtered');
+					console.log(filtered);
+					//data.forEach(function(d){console.log(d.Language);});
+
+					var emojis = filtered.map(function(d){return d.Emoji;}).join(' ');
 
 					//create circular path
 					backdrop.append('path')
@@ -170,7 +180,7 @@
 					    .attr("id", "curve-text")
 					  	.append("textPath")
 					    .attr("xlink:href", "#curve")
-					    .style('font-size', 36)
+					    .style('font-size', 39)
 					    .text(emojis);
 					
 					backdrop.append("use")
