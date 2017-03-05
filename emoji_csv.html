@@ -13,16 +13,35 @@
 			<script>
 				var svg = d3.select("#chart");
 				var usableData = [];
+				function hasNumber(str){
+					return /\d/.test(str);
+				}
 				var parseLine = function(line){
+					console.log(line);
 					line.Negative = +line.Negative;
 					line.Neutral = +line.Neutral;
 					line.Occurrences = +line.Occurrences;
 					line.Position = +line.Position;
 					line.Positive = +line.Positive;
 					line.Score = (line.Positive - line.Negative)/10000;
+					//console.log(line.World);
+					if(line.Language != undefined){
+						if(hasNumber(line.Language)){
+							console.log('has number');
+							line.World = line.Language;
+							line.Language = '';
+						}
+					}
+					else{
+						line.Language = '';
+					}
+					if(line.World != undefined){
+						line.World = line.World.split(' ').forEach(function(w)
+								{return +w;});
+					}
 					return line;
 				}
-				var raw_data = d3.csv("Emoji_Sentiment_Data.csv", parseLine, function(error, data){
+				var raw_data = d3.csv("Emoji.csv", parseLine, function(error, data){
 					console.log('here');
 					console.log(data);
 					showData(data);
@@ -67,7 +86,7 @@
 				}*/
 
 					var neutralExtent = d3.extent(data, function(d){return d.Neutral;});
-					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([650,50]);
+					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
 					var scoreExtent = d3.extent(data, function(d){return d.Score;});
 					console.log(scoreExtent);
 					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
@@ -139,13 +158,15 @@
 		</p>
 		<p>
 			Look we have a circle!<br>
-			<svg id = "piethingy" width = "1000" height = "700">
+			<svg id = "piethingy" width = "900" height = "900">
+			<svg id = 'legend' width = '200' height = '400' style = "stroke : black">
 			<script>
 				var backdrop = d3.select('#piethingy');
+				var legend = d3.select('#legend');
 				var circleCenter = [500, 350];
-				var circleRadius = 200;
+				var circleRadius = 340;
 
-				var raw_data_2 = d3.csv("Emoji_Sentiment_Data.csv", parseLine, function(error, data){
+				var raw_data_2 = d3.csv("Emoji.csv", parseLine, function(error, data){
 					console.log('here');
 					console.log(data);
 					circleData(data);
@@ -156,14 +177,19 @@
 					//var emojis = top30.map(function(d){return d.Emoji;}).join(' ');
 					//console.log(data);
 					var filtered = data.filter(function(d){
-						return d.Language != undefined;
+						return d.Language != '';
 					});
 
+					var languages = filtered.map(function(d){return d.Language;});
 					console.log('filtered');
-					console.log(filtered);
+					console.log(filtered.length);
 					//data.forEach(function(d){console.log(d.Language);});
 
 					var emojis = filtered.map(function(d){return d.Emoji;}).join(' ');
+					console.log(filtered);
+					var colorScale = d3.scaleOrdinal().domain(languages)
+													.range(d3.schemeCategory10);
+					//var colors = d3.schemeCategory20().domain([])
 
 					//create circular path
 					backdrop.append('path')
@@ -180,12 +206,30 @@
 					    .attr("id", "curve-text")
 					  	.append("textPath")
 					    .attr("xlink:href", "#curve")
-					    .style('font-size', 39)
+					    .style('font-size', 64)
 					    .text(emojis);
 					
 					backdrop.append("use")
 					    .attr("id", "curve-line")
 					    .attr("xlink:href", "#curve");
+
+					//Due to the text size and placement, six emojis get cut off in the
+					//circle. Need to figure out text size and rotate angle such that
+					//lines point to proper emojis
+					for (var i = 0; i < filtered.length - 2; i++) {
+						backdrop.append('line')
+								.attr('x1', circleCenter[0])
+								.attr('y1', circleCenter[1])
+								.attr('x2', circleCenter[0])
+								.attr('y2', circleCenter[1]+ (circleRadius))
+								.style('stroke', colorScale(filtered[i].Language))
+								.style('stroke-width', 2)
+								.attr('transform', 'rotate(' + (15*i) + ',' 
+															+ circleCenter[0] + ','
+															+ circleCenter[1]+')');
+					}
+
+					legend.append('rect')
 
 				}
 			</script>
