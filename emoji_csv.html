@@ -22,7 +22,21 @@
 					line.Occurrences = +line.Occurrences;
 					line.Position = +line.Position;
 					line.Positive = +line.Positive;
-					line.Score = (line.Positive - line.Negative)/10000;
+					var temp = line.Positive - line.Negative;
+					//line.Score = (line.Positive - line.Negative);
+					var negscoreScale = d3.scaleLinear().domain([-666,0]).range([0.0,0.5]);
+					var posscoreScale = d3.scaleLinear().domain([0,6006]).range([0.5,1.0]);
+					if (temp>0){
+						line.Score=posscoreScale(temp);
+					}
+					if (temp<=0){
+						line.Score=negscoreScale(temp);
+					}
+					if (line.Score==0){
+						line.Score=.001;
+					}
+
+
 					//console.log(line.World);
 					if(line.Language != undefined){
 						if(hasNumber(line.Language)){
@@ -53,8 +67,8 @@
 
 				function showData(data){
 					//top 50 displayed
-					/*var top_50 = getTop(data, 50);
-					var neutralExtent = d3.extent(top_50, function(d){return d.Neutral;});
+					var top100 = getTop(data, 100);
+					/*var neutralExtent = d3.extent(top_50, function(d){return d.Neutral;});
 					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
 					var scoreExtent = d3.extent(top_50, function(d){return d.Score;});
 					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
@@ -84,28 +98,24 @@
 						.attr('transform', 'translate(20,0)');
 				}*/
 
-					var neutralExtent = d3.extent(data, function(d){return (d.Neutral+1);});
+					var neutralExtent = d3.extent(top100, function(d){return (d.Neutral+1);});
 					var neutralScale = d3.scaleLog().domain(neutralExtent).range([650,50]);
 					console.log("NEUTRAL EXTENT");
 					console.log(neutralExtent);
-					var scoreExtent = d3.extent(data, function(d){return (d.Score);});
-					scoreExtent = [scoreExtent[0]*scoreExtent[0],scoreExtent[1]*scoreExtent[1]];
-					var scoreScale = d3.scaleLog().domain(scoreExtent).range([40,960]);
-					var occurExtent = d3.extent(data, function(d){return d.Occurrences;});
-
-
+					var scoreExtent = d3.extent(top100, function(d){return (d.Score);});
+					console.log(scoreExtent);
+					//scoreExtent = [scoreExtent[0]*scoreExtent[0],scoreExtent[1]*scoreExtent[1]];
+					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
+					var occurExtent = d3.extent(top100, function(d){return d.Occurrences;});
 					var occurScale = d3.scaleLinear().domain(occurExtent).range([10,50]);
-					console.log(occurScale(1218));
-					data.forEach(function(d){
+
+					top100.forEach(function(d){
 						/*var xPos = scoreScale(d.Score);
 						var yPos = neutralScale(d.Neutral);
 						d['x'] = xPos;
 						d['y'] = ypos;*/
 						//console.log(scoreScale(d.Score));
-						if (d.Score==null){
-							d.Score=0;
-						}
-
+						//if (!(d.Score<0.51 && d.Score>0.49)){
 						svg.append('text')
 							.text(d.Emoji)
 							.attr("height", occurScale(d.Occurrences))
@@ -113,6 +123,7 @@
 							.style("font-size", occurScale(d.Occurrences))
 							.attr("x", (scoreScale(d.Score)))
 							.attr("y", neutralScale(d.Neutral));
+						//}
 					});
 					var xAxis = d3.axisBottom(scoreScale);
 					svg.append('g')
