@@ -84,26 +84,34 @@
 						.attr('transform', 'translate(20,0)');
 				}*/
 
-					var neutralExtent = d3.extent(data, function(d){return d.Neutral;});
-					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
-					var scoreExtent = d3.extent(data, function(d){return d.Score;});
-					console.log(scoreExtent);
-					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
+					var neutralExtent = d3.extent(data, function(d){return (d.Neutral+1);});
+					var neutralScale = d3.scaleLog().domain(neutralExtent).range([650,50]);
+					console.log("NEUTRAL EXTENT");
+					console.log(neutralExtent);
+					var scoreExtent = d3.extent(data, function(d){return (d.Score);});
+					scoreExtent = [scoreExtent[0]*scoreExtent[0],scoreExtent[1]*scoreExtent[1]];
+					var scoreScale = d3.scaleLog().domain(scoreExtent).range([40,960]);
 					var occurExtent = d3.extent(data, function(d){return d.Occurrences;});
-					console.log(occurExtent);
+
+
 					var occurScale = d3.scaleLinear().domain(occurExtent).range([10,50]);
+					console.log(occurScale(1218));
 					data.forEach(function(d){
 						/*var xPos = scoreScale(d.Score);
 						var yPos = neutralScale(d.Neutral);
 						d['x'] = xPos;
 						d['y'] = ypos;*/
 						//console.log(scoreScale(d.Score));
+						if (d.Score==null){
+							d.Score=0;
+						}
+
 						svg.append('text')
 							.text(d.Emoji)
 							.attr("height", occurScale(d.Occurrences))
 							.attr("width", occurScale(d.Occurrences))
 							.style("font-size", occurScale(d.Occurrences))
-							.attr("x", scoreScale(d.Score))
+							.attr("x", (scoreScale(d.Score)))
 							.attr("y", neutralScale(d.Neutral));
 					});
 					var xAxis = d3.axisBottom(scoreScale);
@@ -245,7 +253,7 @@
 															+ circleCenter[1]+')');
 					}
 
-					d3.legendColor()
+					d3.legendColor();
 
 				}
 			</script>
