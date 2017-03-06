@@ -72,7 +72,7 @@
 
 				function showData(data){
 					//top 50 displayed
-					var top100 = getTop(data, 100);
+					var top100 = getTop(data, 75);
 					/*var neutralExtent = d3.extent(top_50, function(d){return d.Neutral;});
 					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
 					var scoreExtent = d3.extent(top_50, function(d){return d.Score;});
@@ -236,8 +236,8 @@
 								return false;
 						})
 						.map(function(d){return d.Emoji;})
-						.join('\t');
-					return '   ' + toReturn;
+						.join(' ');
+					return toReturn;
 				}
 
 				function circleData(data){
@@ -334,9 +334,11 @@
 						backdrop.append("text")
 							    .attr("id", "small-curve-text")
 							  	.append("textPath")
+							  	.attr("startOffset","25%")
+								.style("text-anchor","middle")
 							    .attr("xlink:href", ("#"+(i-6)))
-							    .style('font-size', 25)
-							    .attr('x', 5)
+							    .style('font-size', 17)
+							    //.attr('x', 10)
 							    //.attr('text-anchor', 'begin')
 							    .text(matchingEmojis);				
 						backdrop.append("use")
@@ -367,9 +369,9 @@
 									.attr('d', "M" + circleCenter[0] + "," + 
 												(circleCenter[1] + circleRadius+10) + " " +
 									           "m" + -smallCircleRadius + ", 0 " +
-									           "a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + 
+									           "a" + smallCircleRadius/2 + "," + smallCircleRadius/2 + " 0 0,0 " + 
 									           			smallCircleRadius*2  + ",0 " +
-									           "a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + 
+									           /*"a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + */
 									           			-smallCircleRadius*2 + ",0Z")
 									.attr('transform', 'rotate(' + angle + ',' 
 																+ circleCenter[0] + ','
@@ -379,9 +381,11 @@
 						backdrop.append("text")
 							    .attr("id", "small-curve-text")
 							  	.append("textPath")
+							  	.attr("startOffset","50%")
+								.style("text-anchor","middle")
 							    .attr("xlink:href", ("#"+(angleCount+1)))
-							    .style('font-size', 25)
-							    .attr('x', 5)
+							    .style('font-size', 17)
+							    //.attr('x', 30)
 							    //.attr('text-anchor', 'begin')
 							    .text(matchingEmojis);				
 						backdrop.append("use")
