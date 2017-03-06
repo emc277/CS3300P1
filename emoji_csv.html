@@ -179,6 +179,7 @@
 						return d.Language != '';
 					});
 
+					filtered.sort(function(a,b){return a.Language.localeCompare(b.Language);})
 					var languages = filtered.map(function(d){return d.Language;});
 					console.log('filtered');
 					console.log(filtered.length);
@@ -211,11 +212,11 @@
 					    .attr("id", "curve-line")
 					    .attr("xlink:href", "#curve");
 
-					//Due to the text size and placement, six emojis get cut off in the
-					//circle. Need to figure out text size and rotate angle such that
-					//lines point to proper emojis
+					
 					console.log(filtered);
 					var angle = 0;
+					//Split into two loops because the emoji at angle 0 is
+					//at filtered[6]
 					for (var i = 6; i < filtered.length-1; i++) {
 						angle = -(13.8*(i-6))
 						backdrop.append('line')
@@ -244,7 +245,7 @@
 															+ circleCenter[1]+')');
 					}
 
-					legend.append('rect')
+					d3.legendColor()
 
 				}
 			</script>
