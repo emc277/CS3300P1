@@ -3,12 +3,17 @@
 <head>
 	<title>HW3</title>
 	<link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
+	<style>
+	svg{
+		padding-left: 50px;
+		padding-top: 50px;
+	}
+	</style>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="http://d3js.org/topojson.v2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 	<body>
-		<p> This is me just playing around with stuff<br>
 			<svg id = "chart" width = "1000" height = "700">
 			<script>
 				var svg = d3.select("#chart");
@@ -99,15 +104,15 @@
 				}*/
 
 					var neutralExtent = d3.extent(top100, function(d){return (d.Neutral+1);});
-					var neutralScale = d3.scaleLog().domain(neutralExtent).range([650,50]);
+					var neutralScale = d3.scaleLog().domain(neutralExtent).range([600,100]);
 					console.log("NEUTRAL EXTENT");
 					console.log(neutralExtent);
 					var scoreExtent = d3.extent(top100, function(d){return (d.Score);});
 					console.log(scoreExtent);
 					//scoreExtent = [scoreExtent[0]*scoreExtent[0],scoreExtent[1]*scoreExtent[1]];
-					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([40,960]);
+					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([50,950]);
 					var occurExtent = d3.extent(top100, function(d){return d.Occurrences;});
-					var occurScale = d3.scaleLinear().domain(occurExtent).range([10,50]);
+					var occurScale = d3.scaleLinear().domain(occurExtent).range([20,70]);
 
 					top100.forEach(function(d){
 						/*var xPos = scoreScale(d.Score);
@@ -128,11 +133,27 @@
 					var xAxis = d3.axisBottom(scoreScale);
 					svg.append('g')
 						.call(xAxis)
-						.attr('transform', 'translate(0,680)');
+						.attr('transform', 'translate(0,600)');
 					var yAxis = d3.axisLeft(neutralScale);
 					svg.append('g')
 						.call(yAxis)
-						.attr('transform', 'translate(20,0)');
+						.attr('transform', 'translate(50,0)');
+						//.attr('transform', 'rotate(90)');
+					svg.append("text")
+						.attr("transform", "translate(500,630)")
+						.style("font-family", "arial")
+						.style("font-size", "14")
+						.text("Score");
+					svg.append("text")
+						.attr("transform", "translate(-45,350)")
+						.style("font-family", "arial")
+						.style("font-size", "14")
+						.text("Neutrality");
+					svg.append("text")
+						.attr("transform", "translate(350,20)")
+						.style("font-family", "arial")
+						.style("font-size", "14")
+						.text("Emoji Positivity/Negativity vs. Neutrality");
 				}
 
 				/*function drawEllipse(category,color){
