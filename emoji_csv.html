@@ -28,7 +28,6 @@
 					line.Position = +line.Position;
 					line.Positive = +line.Positive;
 					var temp = line.Positive - line.Negative;
-					//line.Score = (line.Positive - line.Negative);
 					var negscoreScale = d3.scaleLinear().domain([-666,0]).range([-1.0,0.0]);
 					var posscoreScale = d3.scaleLinear().domain([0,6006]).range([0.0,1.0]);
 					if (temp>0){
@@ -40,6 +39,9 @@
 					if (line.Score==0){
 						line.Score=.001;
 					}
+					//line.Neutral = line.Neutral/4164;
+					var neutralScaler = d3.scaleLog().domain([83,4164]).range([0.0,1.0]);
+					line.Neutral = neutralScaler(line.Neutral);
 
 					//console.log(line.World);
 					if(line.Language != undefined){
@@ -97,10 +99,10 @@
 					    .attr("height", 550)
 					    .attr("x", 50)
 					    .attr("y", 50)
-					    .style("fill-opacity", .4)
+					    .style("fill-opacity", .6)
 					    .style("fill", "url(#gradient)");
 
-					var top100 = getTop(data, 75);
+					var top75 = getTop(data, 75);
 					/*var neutralExtent = d3.extent(top_50, function(d){return d.Neutral;});
 					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
 					var scoreExtent = d3.extent(top_50, function(d){return d.Score;});
@@ -131,69 +133,80 @@
 						.attr('transform', 'translate(20,0)');
 				}*/
 
-					var neutralExtent = d3.extent(top100, function(d){return (d.Neutral+1);});
-					var neutralScale = d3.scaleLog().domain(neutralExtent).range([600,100]);
-					console.log("NEUTRAL EXTENT");
-					console.log(neutralExtent);
-					var scoreExtent = d3.extent(top100, function(d){return (d.Score);});
-					console.log(scoreExtent);
-					scoreExtent = [scoreExtent[0]*scoreExtent[0],scoreExtent[1]*scoreExtent[1]];
-					var scoreScale = d3.scaleLinear().domain([-1.05,1.05]).range([50,1050]);
-					//var scoreAxisScale = d3.scaleLinear().domain([0,1.05]).range([50,1100]);
-					var occurExtent = d3.extent(top100, function(d){return d.Occurrences;});
-					var occurScale = d3.scaleLinear().domain(occurExtent).range([20,70]);
+					var neutralExtent = d3.extent(top75, function(d){return (d.Neutral);});
+					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([600,100]);
+					var scoreExtent = d3.extent(top75, function(d){return (d.Score);});
+					scoreExtent = [scoreExtent[0]-.05,scoreExtent[1]+.05];
+					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([50,1050]);
+					var occurExtent = d3.extent(top75, function(d){return d.Occurrences;});
+					console.log("OCCUR EXTENT");
+					console.log(occurExtent);
+					var occurScale = d3.scaleLog().domain(occurExtent).range([600,100]);
 
 					var xAxis = d3.axisBottom(scoreScale);
+					var yAxis = d3.axisLeft(occurScale)
+						.ticks(5, ",.1s");
 					svg.append('g')
 						.call(xAxis)
 						.attr('transform', 'translate(0,600)');
-					var yAxis = d3.axisLeft(neutralScale);
-					//	.call(yAxis)
-					//	.attr('transform', 'translate(50,0)');
 						//.tickValues([]);
 					svg.append('g')
 						.call(yAxis)
-						.attr('transform', 'translate(50,0)');
+						//.ticks(5, ",.1s")
+						.attr('transform', 'translate(550,0)');
+						//.ticks(7, ",.1s");
 						//.attr('transform', 'rotate(90)');
 					svg.append("text")
-						.attr("transform", "translate(525,640)")
+						.attr("transform", "translate(550,640)")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
 						.text("Sentiment Score");
 					svg.append("text")
-						.attr("transform", "translate(-45,350)")
+						.attr("transform", "translate(100,640)")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
-						.text("Neutrality");
-					/*svg.append("text")
-						.attr("transform", "translate(100,100)")
+						.style("text-anchor", "middle")
+						.text("(Negative)");
+					svg.append("text")
+						.attr("transform", "translate(1000,640)")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
-						.text("Negative");*/
+						.style("text-anchor", "middle")
+						.text("(Positive)");
+					svg.append("text")
+						.attr("transform", "translate(550,70)")
+						.style("font-family", "Verdana")
+						.style("font-size", "14")
+						.style("text-anchor", "middle")
+						.style("alignment-baseline", "middle")
+						.text("Frequency of use");
 					svg.append("text")
 						.attr("transform", "translate(525,20)")
 						.style("font-family", "Verdana")
 						.style("font-size", "22")
 						.style("text-anchor", "middle")
-						.text("Emoji Positivity/Negativity vs. Neutrality");
+						.text("Emoji Sentiment vs. Frequency of use");
 
-					top100.forEach(function(d){
+					top75.forEach(function(d){
 						/*var xPos = scoreScale(d.Score);
 						var yPos = neutralScale(d.Neutral);
 						d['x'] = xPos;
 						d['y'] = ypos;*/
 						//console.log(scoreScale(d.Score));
 						//if (!(d.Score<0.51 && d.Score>0.49)){
+						//if (d.Unicode_name.includes("Black")){
+						//console.log("unicode name???");
+						//console.log(d.Unicodename);
 						svg.append('text')
 							.text(d.Emoji)
-							.attr("height", occurScale(d.Occurrences))
-							.attr("width", occurScale(d.Occurrences))
-							.style("font-size", occurScale(d.Occurrences))
+							.attr("height", 20)
+							.attr("width", 20)
+							.style("font-size", 20)
 							.style("text-anchor", "middle")
 							.style("alignment-baseline", "middle")
-							.attr("x", (scoreScale(d.Score)))
-							.attr("y", neutralScale(d.Neutral));
+							.attr("x", scoreScale(d.Score))
+							.attr("y", occurScale(d.Occurrences));
 						//}
 					});
 				}
@@ -238,7 +251,6 @@
 			</script>
 		</p>
 		<p>
-			Look we have a circle!<br>
 			<svg id = "piethingy" width = "1000" height = "1000"/><br>
 			<svg id = 'legend' width = '200' height = '400'/>
 			<script>
