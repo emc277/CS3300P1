@@ -13,8 +13,8 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 ☺,0x263a,2062,0.798633582,128,449,1485,WHITE SMILING FACE,Miscellaneous Symbols
 ♡,0x2661,1975,0.763695423,102,448,1425,WHITE HEART SUIT,Miscellaneous Symbols
 👍,0x1f44d,1854,0.812125626,213,460,1181,THUMBS UP SIGN,Miscellaneous Symbols and Pictographs,1 2
-😩,0x1f629,1808,0.826213985,1069,336,403,WEARY FACE,Emoticons,Spanish,4,Sad
-🙏,0x1f64f,1539,0.793847592,124,648,767,PERSON WITH FOLDED HANDS,Emoticons,Portuguese,3 4,Religion
+😩,0x1f629,1808,0.826213985,1069,336,403,WEARY FACE,Emoticons,Spain,4,Sad
+🙏,0x1f64f,1539,0.793847592,124,648,767,PERSON WITH FOLDED HANDS,Emoticons,Brazil,3 4,Religion
 ✌,0x270c,1534,0.790480332,173,476,885,VICTORY HAND,Dingbats
 😏,0x1f60f,1522,0.764977294,170,676,676,SMIRKING FACE,Emoticons,3
 😉,0x1f609,1521,0.844832651,151,513,857,WINKING FACE,Emoticons,,2,Happy
@@ -24,11 +24,11 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 😄,0x1f604,1398,0.794972621,191,426,781,SMILING FACE WITH OPEN MOUTH AND SMILING EYES,Emoticons,,2,Happy
 😒,0x1f612,1385,0.857620553,819,266,300,UNAMUSED FACE,Emoticons,3 4
 💃,0x1f483,1344,0.852764705,59,237,1048,DANCER,Miscellaneous Symbols and Pictographs,,3 4,Party
-💖,0x1f496,1263,0.762239109,54,254,955,SPARKLING HEART,Miscellaneous Symbols and Pictographs,French,1 2,Heart
-😃,0x1f603,1206,0.734782211,86,361,759,SMILING FACE WITH OPEN MOUTH,Emoticons,Turkish,,Happy
+💖,0x1f496,1263,0.762239109,54,254,955,SPARKLING HEART,Miscellaneous Symbols and Pictographs,France,1 2,Heart
+😃,0x1f603,1206,0.734782211,86,361,759,SMILING FACE WITH OPEN MOUTH,Emoticons,Turkey,,Happy
 😔,0x1f614,1205,0.86614594,559,263,383,PENSIVE FACE,Emoticons,3
 😱,0x1f631,1130,0.773313178,298,319,513,FACE SCREAMING IN FEAR,Emoticons,,,Sad
-🎉,0x1f389,1125,0.743635879,43,207,875,PARTY POPPER,Miscellaneous Symbols and Pictographs,Spanish,1,Party
+🎉,0x1f389,1125,0.743635879,43,207,875,PARTY POPPER,Miscellaneous Symbols and Pictographs,Spain,1,Party
 😜,0x1f61c,1035,0.822246602,115,333,587,FACE WITH STUCK-OUT TONGUE AND WINKING EYE,Emoticons,,,Funny
 ☯,0x262f,992,0.383524015,5,981,6,YIN YANG,Miscellaneous Symbols
 🌸,0x1f338,946,0.570021571,37,255,654,CHERRY BLOSSOM,Miscellaneous Symbols and Pictographs,,1,Nature
@@ -108,7 +108,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 ✊,0x270a,270,0.858608998,37,79,154,RAISED FIST,Dingbats,,,Raunchy
 😨,0x1f628,269,0.813687927,117,73,79,FEARFUL FACE,Emoticons
 😖,0x1f616,268,0.868926665,130,50,88,CONFOUNDED FACE,Emoticons
-💤,0x1f4a4,267,0.800461854,38,91,138,SLEEPING SYMBOL,Miscellaneous Symbols and Pictographs,Malaysian,,Sleep
+💤,0x1f4a4,267,0.800461854,38,91,138,SLEEPING SYMBOL,Miscellaneous Symbols and Pictographs,Malaysia,,Sleep
 💓,0x1f493,259,0.783045488,15,55,189,BEATING HEART,Miscellaneous Symbols and Pictographs
 👎,0x1f44e,258,0.914491346,128,51,79,THUMBS DOWN SIGN,Miscellaneous Symbols and Pictographs
 💦,0x1f4a6,252,0.779043752,35,62,155,SPLASHING SWEAT SYMBOL,Miscellaneous Symbols and Pictographs,,,Raunchy
@@ -117,7 +117,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 ⚡,0x26a1,246,0.778780762,10,182,54,HIGH VOLTAGE SIGN,Miscellaneous Symbols
 🙋,0x1f64b,236,0.732500422,30,60,146,HAPPY PERSON RAISING ONE HAND,Emoticons
 🎄,0x1f384,236,0.632526433,15,79,142,CHRISTMAS TREE,Miscellaneous Symbols and Pictographs,,1,Holiday
-💩,0x1f4a9,229,0.839720048,94,68,67,PILE OF POO,Miscellaneous Symbols and Pictographs,Malaysian,,Funny
+💩,0x1f4a9,229,0.839720048,94,68,67,PILE OF POO,Miscellaneous Symbols and Pictographs,Malaysia,,Funny
 🎵,0x1f3b5,223,0.71526961,23,64,136,MUSICAL NOTE,Miscellaneous Symbols and Pictographs
 ➡,0x27a1,222,0.478330444,2,185,35,BLACK RIGHTWARDS ARROW,Dingbats
 😛,0x1f61b,220,0.734419263,18,50,152,FACE WITH STUCK-OUT TONGUE,Emoticons,,,Happy
@@ -220,7 +220,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 ▓,0x2593,90,0.658247473,2,85,3,DARK SHADE,Block Elements
 🚫,0x1f6ab,88,0.702937729,48,32,8,NO ENTRY SIGN,Transport and Map Symbols
 😽,0x1f63d,88,0.754242708,11,14,63,KISSING CAT FACE WITH CLOSED EYES,Emoticons
-🌈,0x1f308,88,0.671884074,5,31,52,RAINBOW,Miscellaneous Symbols and Pictographs,English (US),,LGBT
+🌈,0x1f308,88,0.671884074,5,31,52,RAINBOW,Miscellaneous Symbols and Pictographs,United States,,LGBT
 🙀,0x1f640,88,0.790729154,14,30,44,WEARY CAT FACE,Emoticons
 ⚠,0x26a0,88,0.489084942,16,62,10,WARNING SIGN,Miscellaneous Symbols
 🎮,0x1f3ae,86,0.467430446,8,32,46,VIDEO GAME,Miscellaneous Symbols and Pictographs
@@ -230,7 +230,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 ✓,0x2713,84,0.627535601,9,41,34,CHECK MARK,Dingbats
 👐,0x1f450,83,0.875981032,33,19,31,OPEN HANDS SIGN,Miscellaneous Symbols and Pictographs
 🙇,0x1f647,83,0.794293941,24,23,36,PERSON BOWING DEEPLY,Emoticons
-🍟,0x1f35f,83,0.650433666,14,29,40,FRENCH FRIES,Miscellaneous Symbols and Pictographs,English (AU),,Junk Food
+🍟,0x1f35f,83,0.650433666,14,29,40,FRENCH FRIES,Miscellaneous Symbols and Pictographs,Australia,,Junk Food
 🍌,0x1f34c,82,0.540634157,10,25,47,BANANA,Miscellaneous Symbols and Pictographs
 💑,0x1f491,82,0.682682631,5,16,61,COUPLE WITH HEART,Miscellaneous Symbols and Pictographs,,,Wedding
 👬,0x1f46c,82,0.622239773,29,29,24,TWO MEN HOLDING HANDS,Miscellaneous Symbols and Pictographs,,,LGBT
@@ -287,7 +287,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 🌃,0x1f303,56,0.747623603,3,27,26,NIGHT WITH STARS,Miscellaneous Symbols and Pictographs,,,Sleep
 ❌,0x274c,56,0.612998,14,12,30,CROSS MARK,Dingbats
 🐰,0x1f430,55,0.707516692,4,13,38,RABBIT FACE,Miscellaneous Symbols and Pictographs
-💊,0x1f48a,55,0.675071279,8,14,33,PILL,Miscellaneous Symbols and Pictographs,English (AU),,Drugs
+💊,0x1f48a,55,0.675071279,8,14,33,PILL,Miscellaneous Symbols and Pictographs,Australia,,Drugs
 🚨,0x1f6a8,55,0.520959173,6,6,43,POLICE CARS REVOLVING LIGHT,Transport and Map Symbols
 😦,0x1f626,54,0.882218595,30,15,9,FROWNING FACE WITH OPEN MOUTH,Emoticons
 🍪,0x1f36a,54,0.736575166,10,16,28,COOKIE,Miscellaneous Symbols and Pictographs
@@ -420,7 +420,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 👛,0x1f45b,25,0.696359786,4,7,14,PURSE,Miscellaneous Symbols and Pictographs
 🚙,0x1f699,25,0.653234313,5,14,6,RECREATIONAL VEHICLE,Transport and Map Symbols
 🌱,0x1f331,25,0.561338235,0,9,16,SEEDLING,Miscellaneous Symbols and Pictographs,,,Nature
-💻,0x1f4bb,25,0.489415613,1,16,8,PERSONAL COMPUTER,Miscellaneous Symbols and Pictographs,English (US),,Technology
+💻,0x1f4bb,25,0.489415613,1,16,8,PERSONAL COMPUTER,Miscellaneous Symbols and Pictographs,United States,,Technology
 🌏,0x1f30f,25,0.681460526,3,10,12,EARTH GLOBE ASIA-AUSTRALIA,Miscellaneous Symbols and Pictographs
 ▄,0x2584,25,0.464453824,8,11,6,LOWER HALF BLOCK,Block Elements
 👓,0x1f453,24,0.514451688,0,16,8,EYEGLASSES,Miscellaneous Symbols and Pictographs
