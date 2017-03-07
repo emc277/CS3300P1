@@ -4,10 +4,25 @@
 	<title>HW3</title>
 	<link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
 	<style>
-	svg{
-		padding-left: 50px;
-		padding-top: 50px;
-	}
+		svg{
+			padding-left: 50px;
+			padding-top: 50px;
+		}
+
+		.visualization{
+			border-radius: 25px;
+			background: #343F51; 
+			display: block;
+			margin: auto;
+		}
+
+		.header{
+			border-radius: 25px;
+			background: #364C64; 
+			display: block;
+			margin: auto;
+		}
+
 	</style>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 	<script src="./node_modules/d3-v4-cloud/build/d3-cloud.min.js"></script>
@@ -111,9 +126,7 @@
 			</script>
 		</div> -->
 		<div>
-			<svg id = "chart" width = "1100" height = "700" style = 'border-radius: 25px;
-    					background: #343F51; display: block;
-    					margin: auto;'/>
+			<svg id = "chart" class = "visualization" width = "1100" height = "700"/>
 			<script>
 				var svg = d3.select("#chart");
 				var usableData = [];
@@ -351,11 +364,10 @@
 				}*/
 				console.log('terminated');
 
-			</script>
+			</script>	
 		</div>
-		<p> Fun circle viz!<br>
-			<svg id = "piethingy" width = "1000" height = "1000"
-				style = />
+		<br><br>
+			<svg id = "piethingy" class = "visualization" width = "1100" height = "900"/>
 			<svg id = 'legend' width = '200' height = '400'/>
 			<script>
 				var backdrop = d3.select('#piethingy');
@@ -658,9 +670,10 @@
 
 				}
 			</script>
-		</p>
 		<div>
-			<svg id = 'map' width = '1000' height = '1000'/>
+			<svg id = 'map' class = "visualization" width = '1100' height = '700'>
+				<svg class = 'header' width = '1100' height = '100'>
+			</svg>
 			<script>
 
 				var map = d3.select("#map");
