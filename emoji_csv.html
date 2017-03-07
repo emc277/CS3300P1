@@ -14,7 +14,7 @@
 	<script src="http://d3js.org/topojson.v2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 	<body>
-			<svg id = "chart" width = "1000" height = "700">
+			<svg id = "chart" width = "1100" height = "700">
 			<script>
 				var svg = d3.select("#chart");
 				var usableData = [];
@@ -29,8 +29,8 @@
 					line.Positive = +line.Positive;
 					var temp = line.Positive - line.Negative;
 					//line.Score = (line.Positive - line.Negative);
-					var negscoreScale = d3.scaleLinear().domain([-666,0]).range([0.0,0.5]);
-					var posscoreScale = d3.scaleLinear().domain([0,6006]).range([0.5,1.0]);
+					var negscoreScale = d3.scaleLinear().domain([-666,0]).range([-1.0,0.0]);
+					var posscoreScale = d3.scaleLinear().domain([0,6006]).range([0.0,1.0]);
 					if (temp>0){
 						line.Score=posscoreScale(temp);
 					}
@@ -40,7 +40,6 @@
 					if (line.Score==0){
 						line.Score=.001;
 					}
-
 
 					//console.log(line.World);
 					if(line.Language != undefined){
@@ -72,6 +71,35 @@
 
 				function showData(data){
 					//top 50 displayed
+					//gradient
+					var gradient = svg.append("defs")
+						.append("linearGradient")
+					    .attr("id", "gradient")
+					    .attr("x1", "0%")
+					    .attr("y1", "0%")
+					    .attr("x2", "100%")
+					    .attr("y2", "0%")
+					    .attr("spreadMethod", "pad");
+					gradient.append("stop")
+					    .attr("offset", "0%")
+					    .attr("stop-color", "#c00")
+					    .attr("stop-opacity", 1);
+					gradient.append("stop")
+						.attr("offset", "50%")
+						.attr("stop-color", "#fff")
+						.attr("stop-opacity", 1);
+					gradient.append("stop")
+					    .attr("offset", "100%")
+					    .attr("stop-color", "blue")
+					    .attr("stop-opacity", 1);
+					svg.append("rect")
+					    .attr("width", 1000)
+					    .attr("height", 550)
+					    .attr("x", 50)
+					    .attr("y", 50)
+					    .style("fill-opacity", .4)
+					    .style("fill", "url(#gradient)");
+
 					var top100 = getTop(data, 75);
 					/*var neutralExtent = d3.extent(top_50, function(d){return d.Neutral;});
 					var neutralScale = d3.scaleLinear().domain(neutralExtent).range([50,650]);
@@ -109,10 +137,46 @@
 					console.log(neutralExtent);
 					var scoreExtent = d3.extent(top100, function(d){return (d.Score);});
 					console.log(scoreExtent);
-					//scoreExtent = [scoreExtent[0]*scoreExtent[0],scoreExtent[1]*scoreExtent[1]];
-					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([50,950]);
+					scoreExtent = [scoreExtent[0]*scoreExtent[0],scoreExtent[1]*scoreExtent[1]];
+					var scoreScale = d3.scaleLinear().domain([-1.05,1.05]).range([50,1050]);
+					//var scoreAxisScale = d3.scaleLinear().domain([0,1.05]).range([50,1100]);
 					var occurExtent = d3.extent(top100, function(d){return d.Occurrences;});
 					var occurScale = d3.scaleLinear().domain(occurExtent).range([20,70]);
+
+					var xAxis = d3.axisBottom(scoreScale);
+					svg.append('g')
+						.call(xAxis)
+						.attr('transform', 'translate(0,600)');
+					var yAxis = d3.axisLeft(neutralScale);
+					//	.call(yAxis)
+					//	.attr('transform', 'translate(50,0)');
+						//.tickValues([]);
+					svg.append('g')
+						.call(yAxis)
+						.attr('transform', 'translate(50,0)');
+						//.attr('transform', 'rotate(90)');
+					svg.append("text")
+						.attr("transform", "translate(525,640)")
+						.style("font-family", "Verdana")
+						.style("font-size", "14")
+						.style("text-anchor", "middle")
+						.text("Sentiment Score");
+					svg.append("text")
+						.attr("transform", "translate(-45,350)")
+						.style("font-family", "Verdana")
+						.style("font-size", "14")
+						.text("Neutrality");
+					/*svg.append("text")
+						.attr("transform", "translate(100,100)")
+						.style("font-family", "Verdana")
+						.style("font-size", "14")
+						.text("Negative");*/
+					svg.append("text")
+						.attr("transform", "translate(525,20)")
+						.style("font-family", "Verdana")
+						.style("font-size", "22")
+						.style("text-anchor", "middle")
+						.text("Emoji Positivity/Negativity vs. Neutrality");
 
 					top100.forEach(function(d){
 						/*var xPos = scoreScale(d.Score);
@@ -126,34 +190,12 @@
 							.attr("height", occurScale(d.Occurrences))
 							.attr("width", occurScale(d.Occurrences))
 							.style("font-size", occurScale(d.Occurrences))
+							.style("text-anchor", "middle")
+							.style("alignment-baseline", "middle")
 							.attr("x", (scoreScale(d.Score)))
 							.attr("y", neutralScale(d.Neutral));
 						//}
 					});
-					var xAxis = d3.axisBottom(scoreScale);
-					svg.append('g')
-						.call(xAxis)
-						.attr('transform', 'translate(0,600)');
-					var yAxis = d3.axisLeft(neutralScale);
-					svg.append('g')
-						.call(yAxis)
-						.attr('transform', 'translate(50,0)');
-						//.attr('transform', 'rotate(90)');
-					svg.append("text")
-						.attr("transform", "translate(500,630)")
-						.style("font-family", "arial")
-						.style("font-size", "14")
-						.text("Score");
-					svg.append("text")
-						.attr("transform", "translate(-45,350)")
-						.style("font-family", "arial")
-						.style("font-size", "14")
-						.text("Neutrality");
-					svg.append("text")
-						.attr("transform", "translate(350,20)")
-						.style("font-family", "arial")
-						.style("font-size", "14")
-						.text("Emoji Positivity/Negativity vs. Neutrality");
 				}
 
 				/*function drawEllipse(category,color){
