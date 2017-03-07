@@ -35,6 +35,13 @@
 			color:orange;
 		}
 
+		.subtitle{
+			text-align: center;
+			font-size:200%;
+			font-family:'Verdana';
+			color:orange;
+		}
+
 	</style>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
@@ -139,9 +146,10 @@
 		</div> -->
 		<div>
 			<p class = 'title'>The Emoji Report</p>
+			<p class = 'subtitle'>Modern communication across the globe.</p>
 		</div>
 		<div>
-			<svg id = "chart" class = "visualization" width = "1100" height = "700"/>
+			<svg id = "chart" class = "visualization" width = "1200" height = "700"/>
 			<script>
 				var svg = d3.select("#chart");
 				var usableData = [];
@@ -311,23 +319,23 @@
 						.attr("transform", "translate(550,640)")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
-						.attr("fill", "#D8D8D8")
+						.attr("fill", "white")
 						.style("text-anchor", "middle")
 						.text("Sentiment Score");
 					svg.append("text")
 						.attr("transform", "translate(100,640)")
-						.attr("fill", "#D8D8D8")
+						.attr("fill", "white")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
-						.text("(Negative)");
+						.text("Negative");
 					svg.append("text")
 						.attr("transform", "translate(1000,640)")
-						.attr("fill", "#D8D8D8")
+						.attr("fill", "white")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
-						.text("(Positive)");
+						.text("Positive");
 					svg.append("text")
 						.attr("transform", "translate(550,70)")
 						.style("font-family", "Verdana")
@@ -336,9 +344,9 @@
 						.style("alignment-baseline", "middle")
 						.text("Frequency of use");
 					svg.append("text")
-						.attr("transform", "translate(525,20)")
-						.attr("fill", "#D8D8D8")
-						.style("font-family", "Anaheim")
+						.attr("transform", "translate(590,20)")
+						.attr("fill", "white")
+						.style("font-family", "Verdana")
 						.style("font-size", "22")
 						.style("text-anchor", "middle")
 						.text("Emoji Sentiment vs. Frequency of use");
@@ -753,12 +761,16 @@
 			</script>
 		<br><br>
 		<div>
-			<svg id = 'map' class = "visualization" width = '1100' height = '700'>
+			<svg id = 'map' class = "visualization" width = '1200' height = '700'>
 				<svg class = 'header' width = '1100' height = '100'>
 			</svg>
 			<script>
 
 				var map = d3.select("#map");
+				map.append('text')
+					.attr('x', '500')
+					.attr('y', '20')
+					.attr()
 				var path = d3.geoPath();
 
 				d3.queue()
@@ -807,28 +819,30 @@
 
 					});
 
+					var elements = map.append("g")
+
 					function appendEmojis(stateData, stateEmojis, stateNames, stateBorders){
-						map.append("g")
+						elements.append("g")
 					      .attr("class", "states")
 					    .selectAll("path")
 					    .data(stateData)
 					    .enter().append("path")
 					      .attr("d", path)
-					      .style('fill', 'lavender')
+					      .style('fill', '#1D2129')
 					      //.attr('fill-opacity', .3);
 
-					  map.append("path")
+					  elements.append("path")
 					      .attr("class", "state-borders")
 					      .attr("d", path(stateBorders))
 					      .attr('stroke-width', 2)
 					      //.attr('stroke-opcaity', .1)
 					      .attr('stroke', '#343F51')
-					      .attr('fill', 'lavender')
+					      .attr('fill', '#1D2129')
 					      //.attr('fill-opacity', .3)
 					      .style('stroke-linejoin', 'round')
 					      .style('stroke-linecap', 'round');
 
-						map
+						elements
 							.selectAll('text')
 							.data(stateData)
 							.enter()
@@ -844,6 +858,8 @@
 							.attr('stroke', "red")
 							.attr('text-anchor', 'middle');
 					}
+
+					elements.attr('transform', 'translate(120,20)');
 
 					
 				}
