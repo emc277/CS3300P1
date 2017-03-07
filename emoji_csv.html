@@ -13,7 +13,7 @@
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="http://d3js.org/topojson.v2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-	<body>
+	<body style = 'background-color:#33475b'>
 			<svg id = "chart" width = "1100" height = "700">
 			<script>
 				var svg = d3.select("#chart");
@@ -237,9 +237,9 @@
 
 			</script>
 		</p>
-<p>
+		<p>
 			Look we have a circle!<br>
-			<svg id = "piethingy" width = "900" height = "900"/><br>
+			<svg id = "piethingy" width = "1000" height = "1000"/><br>
 			<svg id = 'legend' width = '200' height = '400'/>
 			<script>
 				var backdrop = d3.select('#piethingy');
@@ -254,7 +254,7 @@
 				});
 
 				//Inspired by: http://bl.ocks.org/bycoffe/3404776
-				function generateSmallCircles(numCircles, radius){
+				function generateTextBlocks(numCircles, radius){
 					var toReturn = [];
 					var width = (radius*2);
 					var angle, x, y = 0;
@@ -290,20 +290,21 @@
 						return d.Language != '';
 					});
 
-					filtered.sort(function(a,b){return a.Language.localeCompare(b.Language);})
+					filtered.sort(function(a,b){return a.Language.localeCompare(b.Language);});
 					var languages = filtered.map(function(d){return d.Language;});
 					console.log('filtered');
 					console.log(filtered.length);
 					//data.forEach(function(d){console.log(d.Language);});
 
-					var emojis = filtered.map(function(d){return d.Emoji;}).join(' ');
+					var emojis = filtered.map(function(d){return d.Emoji;}).join('        ');
+					console.log(emojis);
 					console.log(filtered);
 					var colorScale = d3.scaleOrdinal().domain(languages)
 													.range(d3.schemeCategory10);
 					//var colors = d3.schemeCategory20().domain([])
 
 					//create circular path
-					backdrop.append('path')
+					/*backdrop.append('path')
 						.attr('id', 'curve')
 						.attr('fill', 'none')
 						.attr('d', "M" + circleCenter[0] + "," + circleCenter[1] + " " +
@@ -317,12 +318,14 @@
 					backdrop.append("text")
 					    .attr("id", "curve-text")
 					  	.append("textPath")
+					  	//.attr("startOffset","40%")
+						//.style("text-anchor","middle")
 					    .attr("xlink:href", "#curve")
-					    .style('font-size', 63)
+					    .style('font-size', 45)
 					    .text(emojis);				
 					backdrop.append("use")
 					    .attr("id", "curve-line")
-					    .attr("xlink:href", "#curve");
+					    .attr("xlink:href", "#curve");*/
 
 					//small circle	
 					/*for (var k = 0; k < 26; k++) {
@@ -339,15 +342,106 @@
 							.attr('transform', 'translate(' + 498 + ',' + );
 					}*/
 
-					
+					var smallCircleRadius = 55;
+					var smallerCircleRadius = 45;
 					console.log(filtered);
-					var angle = 0;
+					var textElems = [];
+					var coords = generateTextBlocks(filtered.length, circleRadius);
+
+					for (var j = 0; j < coords.length; j++){
+						backdrop.append('line')
+								.attr('x1', (circleCenter[0]))
+								.attr('y1', (circleCenter[1]))
+								.attr('x2', coords[j].x)
+								.attr('y2', coords[j].y)
+								.style('stroke', colorScale(filtered[j].Language))
+								.style('stroke-width', 5);
+						backdrop.append('path')
+								//.attr('stroke', colorScale(filtered[j].Language))
+								.attr('fill', 'none')
+								//.attr('stroke-width', 3)
+								.attr('id', ('circle'+j))
+								.attr('d', "M" + coords[j].x + "," + 
+											coords[j].y + " " +
+								           "m" + (-smallCircleRadius) + ", 0 " +
+								           "a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + 
+								           			smallCircleRadius*2  + ",0 " +
+								           "a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + 
+								           			-smallCircleRadius*2 + ",0Z")
+								.attr('transform', 'rotate('+ (25.7*j) + ',' +	coords[j].x + ',' + coords[j].y +')');
+						backdrop.append('path')
+								.attr('stroke', colorScale(filtered[j].Language))
+								.attr('fill', 'white')
+								.attr('stroke-width', 5)
+								//.attr('id', ('circle'+j))
+								.attr('d', "M" + coords[j].x + "," + 
+											coords[j].y + " " +
+								           "m" + (-smallerCircleRadius-10) + ", 0 " +
+								           "a" + smallerCircleRadius + "," + smallerCircleRadius + " 0 1,0 " + 
+								           			smallerCircleRadius*2  + ",0 " +
+								           "a" + smallerCircleRadius + "," + smallerCircleRadius + " 0 1,0 " + 
+								           			-smallerCircleRadius*2 + ",0Z")
+								.attr('transform', 'rotate('+ (25.7*j) + ',' +	coords[j].x + ',' + coords[j].y +')');
+						backdrop.append('text')
+										.attr('id', coords[j].id)
+										.style('text-anchor', 'middle')
+										.style('dominant-baseline', 'central')
+										.attr('x', coords[j].x)
+										.attr('y', coords[j].y)
+										//.attr('width', 90)
+										//.attr('height',90)
+										.style('font-size', 50)
+										.text(filtered[j].Emoji);
+
+						backdrop.append('text')
+							.attr('x', circleCenter[0])
+							.attr('y', circleCenter[1])
+							.attr('text-anchor', 'middle')
+							.style('font-size', 100)
+							.style('alignment-baseline', 'middle')
+							.text(data[0].Emoji);
+						var matchingEmojis = getMatchingCategory(data, filtered[j]);
+
+						backdrop.append("text")
+							    .attr("id", "small-curve-text")
+							  	.append("textPath")
+							  	.attr("startOffset","50%")
+								.style("text-anchor","middle")
+								.style('alignment-baseline', 'hanging')
+							    .attr("xlink:href", ("#circle"+(j)))
+							    .style('font-size', 35)
+							    //.attr('x', 10)
+							    //.attr('text-anchor', 'begin')
+							    .text(matchingEmojis);				
+						backdrop.append("use")
+							    .attr("id", "small-curve-line")
+							    .attr("xlink:href", "#circle"+(j));
+					}
+
+					/*for (var i = 0; i < coords.length; i++) {
+						console.log(filtered[i]);
+						console.log(coords[i]);
+						var elem = backdrop.append('text')
+												.attr('id', coords[i].id)
+												.attr('x', coords[i].x)
+												.attr('y', coords[i].y)
+												.style('text-anchor', 'middle')
+												.style('alignment-baseline', 'middle')
+												//.attr('width', 40)
+												//.attr('height',40)
+												.style('font-size', 60)
+												.text(filtered[i].Emoji);
+						textElems.push(elem);
+					}*/
+
+
+					/*var angle = 0;
 					//Split into two loops because the emoji at angle 0 is
 					//at filtered[6]
 					var smallCircleRadius = 50;
-					for (var i = 6; i < filtered.length; i++) {
-						angle = -(13.8*(i-6))
-						console.log((i-6));
+					for (var i = 3; i < filtered.length; i++) {
+						angle = -(24*(i-3))
+						console.log((i-3));
 						backdrop.append('line')
 								.attr('x1', circleCenter[0])
 								.attr('y1', circleCenter[1])
@@ -388,11 +482,11 @@
 							    .attr("xlink:href", "#"+(i-6));
 					}
 
-					for (var j = 0; j < 7; j++) {
-						var angleCount = j+ 19;
-						angle = -(13.8*(angleCount));
+					for (var j = 0; j < 3; j++) {
+						var angleCount = j+ 12;
+						angle = -(24*(angleCount));
 						console.log(angle);
-						console.log('index: ' + (j+19));
+						console.log('index: ' + (j+12));
 						console.log(j);
 						console.log(filtered[j]);
 						var lineAdded = backdrop.append('line')
@@ -413,7 +507,7 @@
 									           "m" + -smallCircleRadius + ", 0 " +
 									           "a" + smallCircleRadius/2 + "," + smallCircleRadius/2 + " 0 0,0 " + 
 									           			smallCircleRadius*2  + ",0 " +
-									           /*"a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + */
+									           "a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " +
 									           			-smallCircleRadius*2 + ",0Z")
 									.attr('transform', 'rotate(' + angle + ',' 
 																+ circleCenter[0] + ','
@@ -448,7 +542,7 @@
 
 				}
 			</script>
-		</p>	
+		</p>		
 	</body>
 </head>
 </html>

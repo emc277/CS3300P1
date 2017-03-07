@@ -43,7 +43,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 😡,0x1f621,756,0.861522028,403,81,272,POUTING FACE,Emoticons
 😎,0x1f60e,754,0.76564387,79,224,451,SMILING FACE WITH SUNGLASSES,Emoticons,,2,Hot Weather
 😢,0x1f622,749,0.813896833,288,168,293,CRYING FACE,Emoticons,3 4
-💋,0x1f48b,734,0.800580592,28,169,537,KISS MARK,Miscellaneous Symbols and Pictographs,Russian,2,Romantic
+💋,0x1f48b,734,0.800580592,28,169,537,KISS MARK,Miscellaneous Symbols and Pictographs,,2,Romantic
 😋,0x1f60b,734,0.76498518,33,203,498,FACE SAVOURING DELICIOUS FOOD,Emoticons
 🙊,0x1f64a,725,0.740523086,97,197,431,SPEAK-NO-EVIL MONKEY,Emoticons
 😴,0x1f634,718,0.849922938,303,170,245,SLEEPING FACE,Emoticons,,1 3,Sleep
@@ -89,7 +89,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 ✈,0x2708,322,0.521940266,13,161,148,AIRPLANE,Dingbats
 🔝,0x1f51d,303,0.798433666,26,106,171,TOP WITH UPWARDS ARROW ABOVE,Miscellaneous Symbols and Pictographs
 😰,0x1f630,302,0.919654285,132,44,126,FACE WITH OPEN MOUTH AND COLD SWEAT,Emoticons,,,Sad
-⚽,0x26bd,299,0.193496177,15,83,201,SOCCER BALL,Miscellaneous Symbols,Canada,,Sports
+⚽,0x26bd,299,0.193496177,15,83,201,SOCCER BALL,Miscellaneous Symbols,,,Sports
 😑,0x1f611,299,0.844272967,154,85,60,EXPRESSIONLESS FACE,Emoticons,3
 👑,0x1f451,298,0.698804832,12,65,221,CROWN,Miscellaneous Symbols and Pictographs,,2,Royalty
 😹,0x1f639,295,0.8074145,88,77,130,CAT FACE WITH TEARS OF JOY,Emoticons
@@ -116,7 +116,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 😷,0x1f637,246,0.840376534,117,54,75,FACE WITH MEDICAL MASK,Emoticons
 ⚡,0x26a1,246,0.778780762,10,182,54,HIGH VOLTAGE SIGN,Miscellaneous Symbols
 🙋,0x1f64b,236,0.732500422,30,60,146,HAPPY PERSON RAISING ONE HAND,Emoticons
-🎄,0x1f384,236,0.632526433,15,79,142,CHRISTMAS TREE,Miscellaneous Symbols and Pictographs,English (AU),1,Holiday
+🎄,0x1f384,236,0.632526433,15,79,142,CHRISTMAS TREE,Miscellaneous Symbols and Pictographs,,1,Holiday
 💩,0x1f4a9,229,0.839720048,94,68,67,PILE OF POO,Miscellaneous Symbols and Pictographs,Malaysian,,Funny
 🎵,0x1f3b5,223,0.71526961,23,64,136,MUSICAL NOTE,Miscellaneous Symbols and Pictographs
 ➡,0x27a1,222,0.478330444,2,185,35,BLACK RIGHTWARDS ARROW,Dingbats
@@ -126,7 +126,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 💎,0x1f48e,209,0.694054736,11,68,130,GEM STONE,Miscellaneous Symbols and Pictographs,,,Wedding
 🌿,0x1f33f,208,0.600120585,1,125,82,HERB,Miscellaneous Symbols and Pictographs
 🎂,0x1f382,201,0.747999917,16,44,141,BIRTHDAY CAKE,Miscellaneous Symbols and Pictographs
-🌟,0x1f31f,199,0.654510913,11,111,77,GLOWING STAR,Miscellaneous Symbols and Pictographs
+🌟,0x1f31f,199,0.654510913,11,111,77,GLOWING STAR,Miscellaneous Symbols and Pictographs,,,Religion
 🔮,0x1f52e,199,0.333161733,6,133,60,CRYSTAL BALL,Miscellaneous Symbols and Pictographs
 ❗,0x2757,198,0.620120854,31,116,51,HEAVY EXCLAMATION MARK SYMBOL,Dingbats
 👫,0x1f46b,197,0.664270589,43,60,94,MAN AND WOMAN HOLDING HANDS,Miscellaneous Symbols and Pictographs
@@ -134,29 +134,29 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 ✖,0x2716,193,0.514517152,8,116,69,HEAVY MULTIPLICATION X,Dingbats
 ☝,0x261d,191,0.7597726,27,77,87,WHITE UP POINTING INDEX,Miscellaneous Symbols,4
 😙,0x1f619,191,0.875675106,3,34,154,KISSING FACE WITH SMILING EYES,Emoticons
-⛄,0x26c4,191,0.738724736,14,62,115,SNOWMAN WITHOUT SNOW,Miscellaneous Symbols,Russian,,Cold Weather
+⛄,0x26c4,191,0.738724736,14,62,115,SNOWMAN WITHOUT SNOW,Miscellaneous Symbols
 👅,0x1f445,190,0.738179133,23,55,112,TONGUE,Miscellaneous Symbols and Pictographs
 ♪,0x266a,190,0.696314423,15,57,118,EIGHTH NOTE,Miscellaneous Symbols
 🍂,0x1f342,189,0.634540658,6,72,111,FALLEN LEAF,Miscellaneous Symbols and Pictographs
 💏,0x1f48f,185,0.72895246,33,46,106,KISS,Miscellaneous Symbols and Pictographs
 🔪,0x1f52a,183,0.764046479,38,94,51,HOCHO,Miscellaneous Symbols and Pictographs,,,Violence
-🌴,0x1f334,178,0.675890052,13,57,108,PALM TREE,Miscellaneous Symbols and Pictographs,Arabic,1,Nature
+🌴,0x1f334,178,0.675890052,13,57,108,PALM TREE,Miscellaneous Symbols and Pictographs,,1,Nature
 👈,0x1f448,174,0.701409121,14,71,89,WHITE LEFT POINTING BACKHAND INDEX,Miscellaneous Symbols and Pictographs
 🌹,0x1f339,172,0.664431116,3,61,108,ROSE,Miscellaneous Symbols and Pictographs
 🙆,0x1f646,171,0.839916616,15,54,102,FACE WITH OK GESTURE,Emoticons
 ➜,0x279c,170,0.558506642,8,126,36,HEAVY ROUND-TIPPED RIGHTWARDS ARROW,Dingbats
 👻,0x1f47b,168,0.740824428,28,73,67,GHOST,Miscellaneous Symbols and Pictographs
-💰,0x1f4b0,168,0.827466509,26,73,69,MONEY BAG,Miscellaneous Symbols and Pictographs,Canada,,Money
+💰,0x1f4b0,168,0.827466509,26,73,69,MONEY BAG,Miscellaneous Symbols and Pictographs,,,Money
 🍻,0x1f37b,165,0.745306588,17,45,103,CLINKING BEER MUGS,Miscellaneous Symbols and Pictographs,Canada,,Alcohol
 🙅,0x1f645,165,0.838871886,76,47,42,FACE WITH NO GOOD GESTURE,Emoticons
-🌞,0x1f31e,162,0.709366196,3,64,95,SUN WITH FACE,Miscellaneous Symbols and Pictographs,Arabic,,Hot Weather
+🌞,0x1f31e,162,0.709366196,3,64,95,SUN WITH FACE,Miscellaneous Symbols and Pictographs
 🍁,0x1f341,161,0.62398169,5,72,84,MAPLE LEAF,Miscellaneous Symbols and Pictographs
 ⭐,0x2b50,159,0.600764348,5,55,99,WHITE MEDIUM STAR,Miscellaneous Symbols and Arrows
 ▪,0x25aa,159,0.145166872,15,97,47,BLACK SMALL SQUARE,Geometric Shapes
 🎀,0x1f380,156,0.651799025,6,44,106,RIBBON,Miscellaneous Symbols and Pictographs
 ━,0x2501,156,0.540249825,14,100,42,BOX DRAWINGS HEAVY HORIZONTAL,Box Drawing
 ☷,0x2637,154,0.012407833,2,140,12,TRIGRAM FOR EARTH,Miscellaneous Symbols
-🐷,0x1f437,152,0.6026825,11,73,68,PIG FACE,Miscellaneous Symbols and Pictographs,Malaysian,,Farm Animals
+🐷,0x1f437,152,0.6026825,11,73,68,PIG FACE,Miscellaneous Symbols and Pictographs,,,Farm Animals
 🙉,0x1f649,150,0.757694988,26,47,77,HEAR-NO-EVIL MONKEY,Emoticons
 🌺,0x1f33a,150,0.629472896,2,62,86,HIBISCUS,Miscellaneous Symbols and Pictographs,1
 💅,0x1f485,149,0.755747604,27,36,86,NAIL POLISH,Miscellaneous Symbols and Pictographs
@@ -191,7 +191,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 🏈,0x1f3c8,114,0.823010837,7,38,69,AMERICAN FOOTBALL,Miscellaneous Symbols and Pictographs,,,Sports
 💍,0x1f48d,112,0.807520998,16,25,71,RING,Miscellaneous Symbols and Pictographs,,,Wedding
 ☔,0x2614,111,0.687353164,21,36,54,UMBRELLA WITH RAIN DROPS,Miscellaneous Symbols,,,Cold Weather
-👸,0x1f478,111,0.654472403,6,30,75,PRINCESS,Miscellaneous Symbols and Pictographs,English (US),,Royalty
+👸,0x1f478,111,0.654472403,6,30,75,PRINCESS,Miscellaneous Symbols and Pictographs
 🇪,0x1f1ea,109,0.698877291,2,36,71,REGIONAL INDICATOR SYMBOL LETTER E,Enclosed Alphanumeric Supplement
 ░,0x2591,108,0.439438477,25,63,20,LIGHT SHADE,Block Elements
 🍩,0x1f369,107,0.708816106,15,35,57,DOUGHNUT,Miscellaneous Symbols and Pictographs
@@ -353,7 +353,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 🍅,0x1f345,37,0.838126825,9,5,23,TOMATO,Miscellaneous Symbols and Pictographs
 ⛅,0x26c5,37,0.61632427,4,11,22,SUN BEHIND CLOUD,Miscellaneous Symbols
 🐢,0x1f422,37,0.621646684,6,17,14,TURTLE,Miscellaneous Symbols and Pictographs
-👙,0x1f459,37,0.697202004,3,11,23,BIKINI,Miscellaneous Symbols and Pictographs,English (AU),,Clothing
+👙,0x1f459,37,0.697202004,3,11,23,BIKINI,Miscellaneous Symbols and Pictographs
 🏡,0x1f3e1,36,0.744478613,5,9,22,HOUSE WITH GARDEN,Miscellaneous Symbols and Pictographs,1
 🌾,0x1f33e,36,0.558280959,5,5,26,EAR OF RICE,Miscellaneous Symbols and Pictographs
 ◉,0x25c9,36,0.046697697,0,26,10,FISHEYE,Geometric Shapes
@@ -377,7 +377,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 💿,0x1f4bf,33,0.444466092,0,11,22,OPTICAL DISC,Miscellaneous Symbols and Pictographs
 ❁,0x2741,33,0.492535753,0,31,2,EIGHT PETALLED OUTLINED BLACK FLORETTE,Dingbats
 🌳,0x1f333,32,0.536180131,2,11,19,DECIDUOUS TREE,Miscellaneous Symbols and Pictographs
-👰,0x1f470,32,0.787391801,3,9,20,BRIDE WITH VEIL,Miscellaneous Symbols and Pictographs,French,,Wedding
+👰,0x1f470,32,0.787391801,3,9,20,BRIDE WITH VEIL,Miscellaneous Symbols and Pictographs
 ❀,0x2740,32,0.443664362,0,18,14,WHITE FLORETTE,Dingbats
 ⚓,0x2693,32,0.592872704,2,8,22,ANCHOR,Miscellaneous Symbols
 🚴,0x1f6b4,32,0.573441922,0,9,23,BICYCLIST,Transport and Map Symbols
@@ -400,7 +400,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 🐙,0x1f419,28,0.677637628,2,12,14,OCTOPUS,Miscellaneous Symbols and Pictographs
 👨,0x1f468,28,0.693754806,2,8,18,MAN,Miscellaneous Symbols and Pictographs
 🍚,0x1f35a,28,0.636903275,6,2,20,COOKED RICE,Miscellaneous Symbols and Pictographs
-🍖,0x1f356,28,0.678553575,7,10,11,MEAT ON BONE,Miscellaneous Symbols and Pictographs,English (US),,Meat
+🍖,0x1f356,28,0.678553575,7,10,11,MEAT ON BONE,Miscellaneous Symbols and Pictographs,,,Meat
 ♨,0x2668,28,0.664942237,0,1,27,HOT SPRINGS,Miscellaneous Symbols
 🎹,0x1f3b9,28,0.466337612,0,17,11,MUSICAL KEYBOARD,Miscellaneous Symbols and Pictographs
 ♕,0x2655,28,0.621310417,0,16,12,WHITE CHESS QUEEN,Miscellaneous Symbols
@@ -552,7 +552,7 @@ Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode n
 🎿,0x1f3bf,13,0.727391903,1,5,7,SKI AND SKI BOOT,Miscellaneous Symbols and Pictographs
 ✦,0x2726,13,0.402369693,0,12,1,BLACK FOUR POINTED STAR,Dingbats
 🆔,0x1f194,13,0.479124776,0,1,12,SQUARED ID,Enclosed Alphanumeric Supplement
-⛪,0x26ea,13,0.38723933,2,7,4,CHURCH,Miscellaneous Symbols,,,Religion
+⛪,0x26ea,13,0.38723933,2,7,4,CHURCH,Miscellaneous Symbols
 🌒,0x1f312,13,0.446222397,0,4,9,WAXING CRESCENT MOON SYMBOL,Miscellaneous Symbols and Pictographs
 🐪,0x1f42a,13,0.836925018,0,4,9,DROMEDARY CAMEL,Miscellaneous Symbols and Pictographs
 ╔,0x2554,13,0.309824364,0,9,4,BOX DRAWINGS DOUBLE DOWN AND RIGHT,Box Drawing
