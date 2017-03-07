@@ -545,6 +545,16 @@
 								           "a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + 
 								           			-smallCircleRadius*2 + ",0Z")
 								.attr('transform', 'rotate('+ (25.7*j) + ',' +	coords[j].x + ',' + coords[j].y +')');
+						viz.append('path')
+							.attr('fill', 'none')
+							.attr('id', ('square'+j))
+							.attr('d', "M" + coords[j].x +","+coords[j].y + "," +
+								"M" + (coords[j].x-90)+","+ (coords[j].y+90) + " " +
+								"L" + (coords[j].x+90) + "," + (coords[j].y+90) +" " +
+								"L" + (coords[j].x+90) + "," + (coords[j].y-90) + " " +
+								"L" + (coords[j].x-90) + "," + (coords[j].y-90) + " Z")
+							.attr('transform', 'rotate('+ (25.7*j) + ',' +	coords[j].x + ',' + coords[j].y +')');
+
 						/*viz.append('path')
 								.attr('stroke', colorScale(filtered[j].Language))
 								.attr('fill', 'white')
@@ -604,9 +614,26 @@
 						viz.append("use")
 							    .attr("id", "small-curve-line")
 							    .attr("xlink:href", "#circle"+(j));
+
+						viz.append("text")
+							    .attr("id", "label-text")
+							  	.append("textPath")
+							  	.attr("startOffset","37.5%")
+								.style("text-anchor","middle")
+								.style('alignment-baseline', 'hanging')
+							    .attr("xlink:href", ("#square"+(j)))
+							    .style('font-size', 20)
+							    .style('font-family', 'sans-serif')
+							    .style('fill', 'white')
+							    //.attr('x', 10)
+							    //.attr('text-anchor', 'begin')
+							    .text(filtered[j].Category);	
+						viz.append("use")
+							    .attr("id", "label-text")
+							    .attr("xlink:href", "#square"+(j));
 					}
 
-					viz.attr('transform', 'translate(-100,50)');
+					viz.attr('transform', 'translate(-80,70)');
 
 					var legend = backdrop.append('svg')
 										.attr('class', 'legend');
