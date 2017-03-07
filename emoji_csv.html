@@ -10,6 +10,7 @@
 	}
 	</style>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+	<script src="./node_modules/d3-v4-cloud/build/d3-cloud.min.js"></script>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="http://d3js.org/topojson.v2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
@@ -553,6 +554,63 @@
 						.enter()*/
 
 				}
+			</script>
+		</p>
+		<p>
+			Word cloud! <br>
+			<svg id = "cloud" width = "1000" height = "1000"/>
+			<script>
+
+
+				var raw_data_3 = d3.csv("Emoji.csv", parseLine, function(error, data){
+					//console.log('here');
+					//console.log(data);
+					makeCloud(data);
+				});
+
+				var cld = d3.select('#cloud');
+				function getFreqs(data){
+					var toReturn = []
+					var topList = getTop(data,500);
+					var sizeExtent = d3.extent(topList, function(d){return d.Occurrences});
+					var sizeScale = d3.scaleLinear().domain(sizeExtent).range([10,100]);
+					topList.forEach(function(d){
+						toReturn.push({'text': d.Emoji, 'size': sizeScale(d.Occurrences)});});
+					return toReturn;
+				}
+
+				function makeCloud(data){
+					var frequencyList = getFreqs(data);
+					d3.cloud().size([900, 500])
+			            .words(frequencyList)
+			            //.rotate(0)
+			            .padding(0)
+			            .fontSize(function(d) { return d.size; })
+			            //.spiral('rectangular')
+			            .on("end", draw)
+			            .start();
+		        }
+
+	         	function draw(words) {
+	         		console.log(words);
+	        		cld.append('svg')
+		                .attr("width", 850)
+		                .attr("height", 350)
+		                .attr("class", "wordcloud")
+		                .append("g")
+		                // without the transform, words words would get cutoff to the left and top, they would
+		                // appear outside of the SVG area
+		                .attr("transform", "translate(300,200)")
+		                .selectAll("text")
+		                .data(words)
+		                .enter().append("text")
+		                .style("font-size", function(d) { return d.size + "px"; })
+		                .style("fill", 'red')
+		                .attr("transform", function(d) {
+		                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+		                })
+		                .text(function(d) { return d.text; });
+    			}
 			</script>
 		</p>		
 	</body>
