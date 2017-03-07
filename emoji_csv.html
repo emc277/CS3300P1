@@ -14,14 +14,12 @@
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="http://d3js.org/topojson.v2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-	<body style = 'background-color:#33475b'>
-			<svg id = "chart" width = "1100" height = "700">
+	<body style = 'background-color:#1D2129'>
+			<!-- <div align = 'center' style = 'border-radius: 25px;
+    					background: #343F51; height: 800px; width: 1300px'>
+			<svg id = "cloud" width = "1000" height = "1000" style = 'display: inline-block;'/>
 			<script>
-				var svg = d3.select("#chart");
-				var usableData = [];
-				function hasNumber(str){
-					return /\d/.test(str);
-				}
+
 				var parseLine = function(line){
 					line.Negative = +line.Negative;
 					line.Neutral = +line.Neutral;
@@ -60,6 +58,106 @@
 								{return +w;});
 					}
 					return line;
+				}
+				var raw_data_3 = d3.csv("Emoji.csv", parseLine, function(error, data){
+					//console.log('here');
+					//console.log(data);
+					makeCloud(data);
+				});
+
+				var cld = d3.select('#cloud');
+				function getFreqs(data){
+					var toReturn = []
+					var topList = getTop(data,500);
+					var sizeExtent = d3.extent(topList, function(d){return d.Occurrences});
+					var sizeScale = d3.scaleLinear().domain(sizeExtent).range([20,150]);
+					topList.forEach(function(d){
+						toReturn.push({'text': d.Emoji, 'size': sizeScale(d.Occurrences)});});
+					return toReturn;
+				}
+
+				function makeCloud(data){
+					var frequencyList = getFreqs(data);
+					d3.cloud().size([900, 700])
+			            .words(frequencyList)
+			            //.rotate(0)
+			            .padding(0)
+			            .fontSize(function(d) { return d.size; })
+			            //.spiral('rectangular')
+			            .on("end", draw)
+			            .start();
+		        }
+
+	         	function draw(words) {
+	         		console.log(words);
+	        		cld.append('svg')
+		                .attr("width", 950)
+		                .attr("height", 950)
+		                .attr("class", "wordcloud")
+		                .append("g")
+		                // without the transform, words words would get cutoff to the left and top, they would
+		                // appear outside of the SVG area
+		                .attr("transform", "translate(350,400)")
+		                .selectAll("text")
+		                .data(words)
+		                .enter().append("text")
+		                .style("font-size", function(d) { return d.size + "px"; })
+		                .style("fill", 'red')
+		                .attr("transform", function(d) {
+		                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+		                })
+		                .text(function(d) { return d.text; });
+    			}
+			</script>
+		</div> -->
+		<div>
+			<svg id = "chart" width = "1100" height = "700" style = 'border-radius: 25px;
+    					background: #343F51; display: block;
+    					margin: auto;'/>
+			<script>
+				var svg = d3.select("#chart");
+				var usableData = [];
+				var parseLine = function(line){
+					line.Negative = +line.Negative;
+					line.Neutral = +line.Neutral;
+					line.Occurrences = +line.Occurrences;
+					line.Position = +line.Position;
+					line.Positive = +line.Positive;
+					var temp = line.Positive - line.Negative;
+					var negscoreScale = d3.scaleLinear().domain([-666,0]).range([-1.0,0.0]);
+					var posscoreScale = d3.scaleLinear().domain([0,6006]).range([0.0,1.0]);
+					if (temp>0){
+						line.Score=posscoreScale(temp);
+					}
+					if (temp<=0){
+						line.Score=negscoreScale(temp);
+					}
+					if (line.Score==0){
+						line.Score=.001;
+					}
+					//line.Neutral = line.Neutral/4164;
+					var neutralScaler = d3.scaleLog().domain([83,4164]).range([0.0,1.0]);
+					line.Neutral = neutralScaler(line.Neutral);
+
+					//console.log(line.World);
+					if(line.Language != undefined){
+						if(hasNumber(line.Language)){
+							console.log('has number');
+							line.World = line.Language;
+							line.Language = '';
+						}
+					}
+					else{
+						line.Language = '';
+					}
+					if(line.World != undefined){
+						line.World = line.World.split(' ').forEach(function(w)
+								{return +w;});
+					}
+					return line;
+				}
+				function hasNumber(str){
+					return /\d/.test(str);
 				}
 				var raw_data = d3.csv("Emoji.csv", parseLine, function(error, data){
 					console.log('here');
@@ -161,16 +259,19 @@
 						.attr("transform", "translate(550,640)")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
+						.attr("fill", "#D8D8D8")
 						.style("text-anchor", "middle")
 						.text("Sentiment Score");
 					svg.append("text")
 						.attr("transform", "translate(100,640)")
+						.attr("fill", "#D8D8D8")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
 						.text("(Negative)");
 					svg.append("text")
 						.attr("transform", "translate(1000,640)")
+						.attr("fill", "#D8D8D8")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
@@ -184,7 +285,8 @@
 						.text("Frequency of use");
 					svg.append("text")
 						.attr("transform", "translate(525,20)")
-						.style("font-family", "Verdana")
+						.attr("fill", "#D8D8D8")
+						.style("font-family", "Anaheim")
 						.style("font-size", "22")
 						.style("text-anchor", "middle")
 						.text("Emoji Sentiment vs. Frequency of use");
@@ -250,9 +352,10 @@
 				console.log('terminated');
 
 			</script>
-		</p>
-		<p>
-			<svg id = "piethingy" width = "1000" height = "1000"/><br>
+		</div>
+		<p> Fun circle viz!<br>
+			<svg id = "piethingy" width = "1000" height = "1000"
+				style = />
 			<svg id = 'legend' width = '200' height = '400'/>
 			<script>
 				var backdrop = d3.select('#piethingy');
@@ -556,63 +659,86 @@
 				}
 			</script>
 		</p>
-		<p>
-			Word cloud! <br>
-			<svg id = "cloud" width = "1000" height = "1000"/>
+		<div>
+			<svg id = 'map' width = '1000' height = '1000'/>
 			<script>
 
+				var map = d3.select("#map");
+				var path = d3.geoPath();
 
-				var raw_data_3 = d3.csv("Emoji.csv", parseLine, function(error, data){
-					//console.log('here');
-					//console.log(data);
-					makeCloud(data);
-				});
+				d3.queue()
+					.defer(d3.tsv, "us-state-names.tsv")
+					.defer(d3.csv, "State_Emoji.csv")
+					.await(drawMap)
 
-				var cld = d3.select('#cloud');
-				function getFreqs(data){
-					var toReturn = []
-					var topList = getTop(data,500);
-					var sizeExtent = d3.extent(topList, function(d){return d.Occurrences});
-					var sizeScale = d3.scaleLinear().domain(sizeExtent).range([10,100]);
-					topList.forEach(function(d){
-						toReturn.push({'text': d.Emoji, 'size': sizeScale(d.Occurrences)});});
-					return toReturn;
+				/*var stateNames = d3.tsv("us-state-names.tsv");
+				console.log(stateNames);
+				var raw_data_5 = d3.csv("State_Emoji.csv", function(error, data){
+					console.log('here');
+					console.log(data);
+					draw(data);
+				});*/
+
+				function getStateById(i, stateNames){
+					for (var l = 0; l < stateNames.length; l++) {
+						if((+stateNames[l].id) == i){
+							console.log(stateNames[l].name);
+							return stateNames[l].name
+						}
+					}
+					return '';
 				}
 
-				function makeCloud(data){
-					var frequencyList = getFreqs(data);
-					d3.cloud().size([900, 500])
-			            .words(frequencyList)
-			            //.rotate(0)
-			            .padding(0)
-			            .fontSize(function(d) { return d.size; })
-			            //.spiral('rectangular')
-			            .on("end", draw)
-			            .start();
-		        }
+				function getEmojiByState(state, stateEmojis){
+					for (var m = 0; m < stateEmojis.length; m++) {
+						if(stateEmojis[m].State == state){
+							console.log(stateEmojis[m].Emoji)
+							return stateEmojis[m].Emoji;
+						}
+					}
+					return '';
+				}
 
-	         	function draw(words) {
-	         		console.log(words);
-	        		cld.append('svg')
-		                .attr("width", 850)
-		                .attr("height", 350)
-		                .attr("class", "wordcloud")
-		                .append("g")
-		                // without the transform, words words would get cutoff to the left and top, they would
-		                // appear outside of the SVG area
-		                .attr("transform", "translate(300,200)")
-		                .selectAll("text")
-		                .data(words)
-		                .enter().append("text")
-		                .style("font-size", function(d) { return d.size + "px"; })
-		                .style("fill", 'red')
-		                .attr("transform", function(d) {
-		                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-		                })
-		                .text(function(d) { return d.text; });
-    			}
+				function drawMap(error, stateNames, stateEmojis){
+					console.log(stateNames);
+					console.log(stateEmojis);
+					d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
+					  if (error) throw error;
+					var stateData = topojson.feature(us, us.objects.states).features;
+					  
+					  map.append("g")
+					      .attr("class", "states")
+					    .selectAll("path")
+					    .data(stateData)
+					    .enter().append("path")
+					      .attr("d", path);
+
+					  map.append("path")
+					      .attr("class", "state-borders")
+					      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+					      .attr('stroke-width', .5)
+					      .attr('stroke', 'white');
+
+					   map.select('g')
+						.selectAll('text')
+						.data(stateData)
+						.enter()
+						.append('text')
+						.text(function(d){
+							console.log(d);
+							var nm = getStateById((+d.id), stateNames);
+							//console.log(nm);
+							return getEmojiByState(nm, stateEmojis);})
+						.attr('x', function(d){return path.centroid(d)[0];})
+						.attr('y', function(d){return path.centroid(d)[1];})
+						.attr('font-size', 20)
+						.attr('text-anchor', 'middle');
+					});
+
+					
+				}
 			</script>
-		</p>		
+		</div>		
 	</body>
 </head>
 </html>
