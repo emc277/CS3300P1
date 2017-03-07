@@ -9,6 +9,10 @@
 			padding-top: 50px;
 		}
 
+		p{
+			font-family: 'sans-serif';
+		}
+
 		.visualization{
 			border-radius: 25px;
 			background: #343F51; 
@@ -31,16 +35,17 @@
 		.title{
 			text-align: center;
 			font-size:300%;
-			font-family:'Verdana';
+			font-family:'sans-serif';
 			color:orange;
 		}
 
 		.subtitle{
 			text-align: center;
 			font-size:200%;
-			font-family:'Verdana';
+			font-family:'sans-serif';
 			color:orange;
 		}
+
 
 	</style>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
@@ -145,8 +150,8 @@
 			</script>
 		</div> -->
 		<div>
-			<p class = 'title'>The Emoji Report</p>
-			<p class = 'subtitle'>Modern communication across the globe.</p>
+			<p class = 'title' style='font-family:sans-serif'>The Emoji Report</p>
+			<p class = 'subtitle' style='font-family:sans-serif'>Modern communication across the globe.</p>
 		</div>
 		<div>
 			<svg id = "chart" class = "visualization" width = "1200" height = "700"/>
@@ -298,26 +303,20 @@
 					scoreExtent = [scoreExtent[0]-.05,scoreExtent[1]+.05];
 					var scoreScale = d3.scaleLinear().domain(scoreExtent).range([50,1050]);
 					var occurExtent = d3.extent(top75, function(d){return d.Occurrences;});
-					console.log("OCCUR EXTENT");
-					console.log(occurExtent);
 					var occurScale = d3.scaleLog().domain(occurExtent).range([600,100]);
-
 					var xAxis = d3.axisBottom(scoreScale);
 					var yAxis = d3.axisLeft(occurScale)
 						.ticks(5, ",.1s");
 					svg.append('g')
 						.call(xAxis)
+						.style('stroke', 'light-gray')
 						.attr('transform', 'translate(0,600)');
-						//.tickValues([]);
 					svg.append('g')
 						.call(yAxis)
-						//.ticks(5, ",.1s")
 						.attr('transform', 'translate(550,0)');
-						//.ticks(7, ",.1s");
-						//.attr('transform', 'rotate(90)');
 					svg.append("text")
 						.attr("transform", "translate(550,640)")
-						.style("font-family", "Verdana")
+						.style("font-family", "sans-serif")
 						.style("font-size", "14")
 						.attr("fill", "white")
 						.style("text-anchor", "middle")
@@ -325,20 +324,20 @@
 					svg.append("text")
 						.attr("transform", "translate(100,640)")
 						.attr("fill", "white")
-						.style("font-family", "Verdana")
+						.style("font-family", "sans-serif")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
 						.text("Negative");
 					svg.append("text")
 						.attr("transform", "translate(1000,640)")
 						.attr("fill", "white")
-						.style("font-family", "Verdana")
+						.style("font-family", "sans-serif")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
 						.text("Positive");
 					svg.append("text")
 						.attr("transform", "translate(550,70)")
-						.style("font-family", "Verdana")
+						.style("font-family", "sans-serif")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
 						.style("alignment-baseline", "middle")
@@ -346,21 +345,11 @@
 					svg.append("text")
 						.attr("transform", "translate(590,20)")
 						.attr("fill", "white")
-						.style("font-family", "Verdana")
+						.style("font-family", "sans-serif")
 						.style("font-size", "22")
 						.style("text-anchor", "middle")
 						.text("Emoji Sentiment vs. Frequency of use");
-
 					top75.forEach(function(d){
-						/*var xPos = scoreScale(d.Score);
-						var yPos = neutralScale(d.Neutral);
-						d['x'] = xPos;
-						d['y'] = ypos;*/
-						//console.log(scoreScale(d.Score));
-						//if (!(d.Score<0.51 && d.Score>0.49)){
-						//if (d.Unicode_name.includes("Black")){
-						//console.log("unicode name???");
-						//console.log(d.Unicodename);
 						svg.append('text')
 							.text(d.Emoji)
 							.attr("height", 20)
@@ -370,7 +359,6 @@
 							.style("alignment-baseline", "middle")
 							.attr("x", scoreScale(d.Score))
 							.attr("y", occurScale(d.Occurrences));
-						//}
 					});
 				}
 
@@ -625,8 +613,6 @@
 							    .style('font-size', 20)
 							    .style('font-family', 'sans-serif')
 							    .style('fill', 'white')
-							    //.attr('x', 10)
-							    //.attr('text-anchor', 'begin')
 							    .text(filtered[j].Category);	
 						viz.append("use")
 							    .attr("id", "label-text")
@@ -637,22 +623,23 @@
 
 					var legend = backdrop.append('svg')
 										.attr('class', 'legend');
-										//.attr('width', '120')
-										//.attr('height', '180');
+
 					legend.append('rect')
-						.attr('width', '150')
-						.attr('height', '200')
+						.attr('width', '175')
+						.attr('height', '270')
 						.attr('rx', '15')
 						.attr('ry', '15')
-						.attr('fill', '#980B0B')
-						.attr('fill-opacity', '.3')
-						.attr('transform', 'translate(1000,275)');
+						.attr('fill', '#1D2129')
+						.attr('fill-opacity', '.4')
+						.attr('transform', 'translate(950,275)');
 
 					legend.append("g")
 						  .attr("class", "legendSymbol")
 						  .attr('fill', 'white')
-						  .attr('font-family', 'Verdana')
-						  .attr("transform", "translate(1015, 300)");
+						  .attr('font-family', 'sans-serif')
+						  .attr('width', '170')
+						  .attr('height', '270')
+						  .attr("transform", "translate(975, 340)");
 
 					var legendPath = d3.legendColor()
 					  .scale(colorScale)
