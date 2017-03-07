@@ -406,7 +406,7 @@
 			</script>	
 		</div>
 		<br><br>
-			<svg id = "piethingy" class = "visualization" width = "1100" height = "900"/>
+			<svg id = "piethingy" class = "visualization" width = "1200" height = "900"/>
 			<!-- <svg id = 'legend' width = '200' height = '400'/> -->
 			<script>
 				var backdrop = d3.select('#piethingy');
@@ -598,7 +598,7 @@
 							    .attr("xlink:href", "#circle"+(j));
 					}
 
-					viz.attr('transform', 'translate(-70,50)');
+					viz.attr('transform', 'translate(-100,50)');
 
 					var legend = backdrop.append('svg')
 										.attr('class', 'legend');
@@ -611,13 +611,13 @@
 						.attr('ry', '15')
 						.attr('fill', '#980B0B')
 						.attr('fill-opacity', '.3')
-						.attr('transform', 'translate(885,275)');
+						.attr('transform', 'translate(1000,275)');
 
 					legend.append("g")
 						  .attr("class", "legendSymbol")
 						  .attr('fill', 'white')
 						  .attr('font-family', 'Verdana')
-						  .attr("transform", "translate(900, 300)");
+						  .attr("transform", "translate(1015, 300)");
 
 					var legendPath = d3.legendColor()
 					  .scale(colorScale)
