@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>HW3</title>
+	<title>Global Emoji</title>
 	<link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
 	<style>
 		svg{
@@ -26,6 +26,13 @@
 		.legend{
 			border-radius: 25px;
 			background: #980B0B; 
+		}
+
+		.title{
+			text-align: center;
+			font-size:300%;
+			font-family:'Verdana';
+			color:orange;
 		}
 
 	</style>
@@ -131,6 +138,9 @@
 			</script>
 		</div> -->
 		<div>
+			<p class = 'title'>The Emoji Report</p>
+		</div>
+		<div>
 			<svg id = "chart" class = "visualization" width = "1100" height = "700"/>
 			<script>
 				var svg = d3.select("#chart");
@@ -226,6 +236,8 @@
 					    .attr("stop-color", "blue")
 					    .attr("stop-opacity", 1);
 
+					//need a white rectangle in the backgroud so that a
+					//more opaque gradient appears lighter
 					svg.append("rect")
 						.attr("width", 1000)
 					    .attr("height", 550)
@@ -497,11 +509,12 @@
 							.attr('transform', 'translate(' + 498 + ',' + );
 					}*/
 
-					var smallCircleRadius = 55;
+					var smallCircleRadius = 60;
 					var smallerCircleRadius = 45;
 					console.log(filtered);
 					var textElems = [];
 					var coords = generateTextBlocks(filtered.length, circleRadius);
+
 					var viz = backdrop.append('g');
 					for (var j = 0; j < coords.length; j++){
 						viz.append('line')
@@ -524,19 +537,28 @@
 								           "a" + smallCircleRadius + "," + smallCircleRadius + " 0 1,0 " + 
 								           			-smallCircleRadius*2 + ",0Z")
 								.attr('transform', 'rotate('+ (25.7*j) + ',' +	coords[j].x + ',' + coords[j].y +')');
-						viz.append('path')
+						/*viz.append('path')
 								.attr('stroke', colorScale(filtered[j].Language))
 								.attr('fill', 'white')
 								.attr('stroke-width', 5)
 								//.attr('id', ('circle'+j))
-								.attr('d', "M" + coords[j].x + "," + 
-											coords[j].y + " " +
+								.attr('d', "M" + coordsBig[j].x + "," + 
+											coordsBig[j].y + " " +
 								           "m" + (-smallerCircleRadius-10) + ", 0 " +
 								           "a" + smallerCircleRadius + "," + smallerCircleRadius + " 0 1,0 " + 
 								           			smallerCircleRadius*2  + ",0 " +
 								           "a" + smallerCircleRadius + "," + smallerCircleRadius + " 0 1,0 " + 
 								           			-smallerCircleRadius*2 + ",0Z")
-								.attr('transform', 'rotate('+ (25.7*j) + ',' +	coords[j].x + ',' + coords[j].y +')');
+								.attr('transform', 'rotate('+ (25.7*j) + ',' +	coordsBig[j].x + ',' + coordsBig[j].y +')');*/
+						viz.append('circle')
+								.attr('stroke', colorScale(filtered[j].Language))
+								.attr('fill', 'white')
+								.attr('stroke-width', 5)
+								//.attr('id', ('circle'+j))
+								.attr('cx', coords[j].x)
+								.attr('cy', coords[j].y)
+								.attr('r', smallerCircleRadius);
+
 						viz.append('text')
 										.attr('id', coords[j].id)
 										.style('text-anchor', 'middle')
@@ -547,7 +569,9 @@
 										//.attr('height',90)
 										.style('font-size', 50)
 										.text(filtered[j].Emoji);
+										//.attr('transform', 'rotate('+ (25.7*j) + ',' +	coordsBig[j].x + ',' + coordsBig[j].y +')');
 
+						//Big emoji in center
 						viz.append('text')
 							.attr('x', circleCenter[0])
 							.attr('y', circleCenter[1])
@@ -555,6 +579,7 @@
 							.style('font-size', 100)
 							.style('alignment-baseline', 'middle')
 							.text(data[0].Emoji);
+
 						var matchingEmojis = getMatchingCategory(data, filtered[j]);
 
 						viz.append("text")
@@ -789,7 +814,7 @@
 					    .data(stateData)
 					    .enter().append("path")
 					      .attr("d", path)
-					      .style('fill', 'white')
+					      .style('fill', 'lavender')
 					      //.attr('fill-opacity', .3);
 
 					  map.append("path")
@@ -798,7 +823,7 @@
 					      .attr('stroke-width', 2)
 					      //.attr('stroke-opcaity', .1)
 					      .attr('stroke', '#343F51')
-					      .attr('fill', 'white')
+					      .attr('fill', 'lavender')
 					      //.attr('fill-opacity', .3)
 					      .style('stroke-linejoin', 'round')
 					      .style('stroke-linecap', 'round');
