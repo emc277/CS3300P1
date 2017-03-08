@@ -233,10 +233,10 @@
 						.attr('transform', 'rotate(-90)')
 
 					chartViz.append("text")
-						.attr("transform", "translate(550,20)")
+						.attr("transform", "translate(550,26)")
 						.attr("fill", "white")
 						.style("font-family", "Verdana")
-						.style("font-size", "22")
+						.style("font-size", "30")
 						.style("text-anchor", "middle")
 						.text("Popularity of Emojis by Sentiment");
 
@@ -270,7 +270,7 @@
 			<script>
 				var backdrop = d3.select('#piethingy');
 				backdrop.append('text')
-					.attr('x', '600')
+					.attr('x', '550')
 					.attr('y', '30')
 					.attr('text-anchor', 'middle')
 					.attr('font-size', 30)
@@ -479,7 +479,7 @@
 
 				var map = d3.select("#map");
 				map.append('text')
-					.attr('x', '600')
+					.attr('x', '550')
 					.attr('y', '30')
 					.attr('text-anchor', 'middle')
 					.attr('font-size', 30)
