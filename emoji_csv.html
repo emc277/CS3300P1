@@ -169,6 +169,7 @@
 			<svg id = "chart" class = "visualization" width = "1200" height = "700"/>
 			<script>
 				var svg = d3.select("#chart");
+				var chartViz = svg.append('g');
 				var usableData = [];
 				var parseLine = function(line){
 					line.Negative = +line.Negative;
@@ -263,14 +264,14 @@
 
 					//need a white rectangle in the backgroud so that a
 					//more opaque gradient appears lighter
-					svg.append("rect")
+					chartViz.append("rect")
 						.attr("width", 1000)
 					    .attr("height", 550)
 					    .attr("x", 50)
 					    .attr("y", 50)
 					    .style('fill', 'white');
 
-					svg.append("rect")
+					chartViz.append("rect")
 					    .attr("width", 1000)
 					    .attr("height", 550)
 					    .attr("x", 50)
@@ -322,49 +323,66 @@
 					var xAxis = d3.axisBottom(scoreScale);
 					var yAxis = d3.axisLeft(occurScale)
 						.ticks(5, ",.1s");
-					svg.append('g')
+					chartViz.append('g')
 						.call(xAxis)
 						.attr('transform', 'translate(0,600)')
 						.attr('class', 'axisWhite');
 						//.tickValues([]);
-					svg.append('g')
+					chartViz.append('g')
 						.call(yAxis)
 						//.ticks(5, ",.1s")
 						.attr('transform', 'translate(50,0)')
 						.attr('class', 'axisWhite');
 						//.ticks(7, ",.1s");
 						//.attr('transform', 'rotate(90)');
-					svg.append("text")
+					chartViz.append("text")
 						.attr("transform", "translate(550,640)")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.attr("fill", "white")
 						.style("text-anchor", "middle")
 						.text("Sentiment Score");
-					svg.append("text")
+					chartViz.append("text")
 						.attr("transform", "translate(100,640)")
 						.attr("fill", "white")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
 						.text("Negative");
-					svg.append("text")
+					chartViz.append("text")
 						.attr("transform", "translate(1000,640)")
 						.attr("fill", "white")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
 						.style("text-anchor", "middle")
 						.text("Positive");
-					svg.append("text")
-						.attr("transform", "rotate(90); translate(1000, 300)")
+					chartViz.append("text")
+						// .attr('x', 400)
+						// .attr('y', 400)
+						//.attr('fill', 'white')
+						//.style("font-family", "Verdana")
+						//.style("font-size", "14")
+						// .style("text-anchor", "end")
+						// .attr("transform", "translate(-600, 400)")
+						// .attr("transform", "rotate(-90)")
+						//.style("alignment-baseline", "middle")
+						.attr("transform", "translate(100,640)")
+						.attr("id", "y-label")
+						.attr("fill", "white")
 						.style("font-family", "Verdana")
 						.style("font-size", "14")
-						.style("text-anchor", "middle")
-						.style("alignment-baseline", "middle")
-						.text("Frequency of use");
-					svg.append("text")
+						.style("text-anchor", "end")
+						//.attr('transform', 'translate(150, -225);rotate(-90)')
+						//.attr('transform', 'translate(150, 225)')
+						.text("Frequency of use")
+						.attr('x', '-275')
+						.attr('y', '15')
+						.attr('transform', 'rotate(-90)')
+					// chartViz.select('#y-label')
+					// 	.attr('transform', 'rotate(-90)');
+					chartViz.append("text")
 						.attr("transform", "translate(590,20)")
-						.attr("fill", "orange")
+						.attr("fill", "white")
 						.style("font-family", "Verdana")
 						.style("font-size", "22")
 						.style("text-anchor", "middle")
@@ -380,7 +398,7 @@
 						//if (d.Unicode_name.includes("Black")){
 						//console.log("unicode name???");
 						//console.log(d.Unicodename);
-						svg.append('text')
+						chartViz.append('text')
 							.text(d.Emoji)
 							.attr("height", 20)
 							.attr("width", 20)
@@ -428,6 +446,7 @@
 						toReturn.push(coords);});
 					return toReturn;
 				}*/
+				chartViz.attr('transform', 'translate(20,0)');
 				console.log('terminated');
 
 			</script>	
@@ -442,7 +461,7 @@
 					.attr('y', '30')
 					.attr('text-anchor', 'middle')
 					.attr('font-size', 30)
-					.attr('fill', 'orange')
+					.attr('fill', 'white')
 					.attr('font-family', 'Verdana')
 					.text("Popular Emoji Categories by Country");
 				//var legend = d3.select('#legend');
@@ -825,7 +844,7 @@
 					.attr('y', '30')
 					.attr('text-anchor', 'middle')
 					.attr('font-size', 30)
-					.attr('fill', 'orange')
+					.attr('fill', 'white')
 					.attr('font-family', 'Verdana')
 					.text("Most Popular Emojis by State");
 				var path = d3.geoPath();
