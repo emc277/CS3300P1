@@ -56,7 +56,11 @@
 
 		.axisWhite text{
 		  fill: white;
-		} 
+		}
+
+		.map text{
+			font-family:'sans-serif';
+		}
 
 
 	</style>
@@ -229,7 +233,7 @@
 						.attr('transform', 'rotate(-90)')
 
 					chartViz.append("text")
-						.attr("transform", "translate(590,20)")
+						.attr("transform", "translate(550,20)")
 						.attr("fill", "white")
 						.style("font-family", "Verdana")
 						.style("font-size", "22")
@@ -253,9 +257,11 @@
 				//Centers chart
 				chartViz.attr('transform', 'translate(20,0)');
 				svg.append('text')
-					.attr('x', 250)
+					.attr('x', 550)
 					.attr('y', 680)
 					.attr('fill','white')
+					.style('text-anchor', 'middle')
+					.attr('font-family', 'sans-serif')
 					.text('Sentiment score is calculated by finding the difference between the positive and negative scores per emoji');
 			</script>	
 		</div>
@@ -509,12 +515,10 @@
 				function drawMap(error, stateNames, stateEmojis){
 
 					d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
-					  if (error) throw error;
-					 var stateData = topojson.feature(us, us.objects.states).features;
-					 var stateBorders = topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; });
-					  
-
-					   appendEmojis(stateData, stateEmojis, stateNames, stateBorders);
+					if (error) throw error;
+					var stateData = topojson.feature(us, us.objects.states).features;
+					var stateBorders = topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; });
+					appendEmojis(stateData, stateEmojis, stateNames, stateBorders);
 
 					});
 
@@ -557,78 +561,46 @@
 					.attr('y', 350)
 					.attr('font-weight', 'bold')
 					.attr('fill', 'white')
+					.attr('font-family', 'sans-serif')
 					.text("Top emoji per state.")
 					map.append('text')
 					.attr('x', 0)
 					.attr('y', 370)
 					.attr('fill', 'white')
+					.attr('font-family', 'sans-serif')
 					.text('The list of emoji used');
 					map.append('text')
 					.attr('x', 0)
 					.attr('y', 387)
 					.attr('fill', 'white')
+					.attr('font-family', 'sans-serif')
 					.text('most in each state');
 					map.append('text')
 					.attr('x', 0)
 					.attr('y', 402)
 					.attr('fill', 'white')
+					.attr('font-family', 'sans-serif')
 					.text('was cross-referenced');
 					map.append('text')
 					.attr('x', 0)
 					.attr('y', 419)
 					.attr('fill', 'white')
+					.attr('font-family', 'sans-serif')
 					.text('with the list of emoji');
 					map.append('text')
 					.attr('x', 0)
 					.attr('y', 438)
 					.attr('fill', 'white')
+					.attr('font-family', 'sans-serif')
 					.text('used more than average');
 					map.append('text')
 					.attr('x', 0)
 					.attr('y', 455)
 					.attr('fill', 'white')
+					.attr('font-family', 'sans-serif')
 					.text('in each state');
 
 				}
-
-				
-					// elements.append('line')
-					// 		.attr('x1', 30)
-					// 		.attr('y1', 200)
-					// 		.attr('x2', 10)
-					// 		.attr('y2', 150)
-					// 		.attr('stroke', 'pink')
-					// 		.attr('stroke-width', 2);
-					// elements.append('svg')
-					// 		.attr('width', 300)
-					// 		.attr('height', 300)
-					// 		.attr('fill', 'pink')
-					// 		.append('text')
-					// 		.attr('x', 10)
-					// 		.attr('y',150)
-					// 		.attr('text-anchor', 'end')
-					// 		.attr('color', 'black')
-					// 		.text("The list of emoji used most in each state was cross-referenced with the list of emoji used more than average in each state");
-
-					// var annotations = [{ 
-					// 				'note': { 'label': "Hi"},
-					// 				  'x': 80, 'y': 230,
-					// 				  'dy': , 'dx': 162}];
-					// var makeAnnotations = d3.annotation()
-					// 					.type(d3.annotationLabel)
-					// 					.annotations(annotations);
-
-					// elements.attr('transform', 'translate(120,20)');
-
-					// map
-					//   .append("g")
-					//   .attr("class", "annotation-group")
-					//   .attr("fill", "pink")
-					//   .attr("stroke", "pink")
-					//   .call(makeAnnotations);
-
-
-
 					
 				//}
 			</script>
